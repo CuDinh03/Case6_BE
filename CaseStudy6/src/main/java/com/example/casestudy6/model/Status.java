@@ -1,5 +1,41 @@
 package com.example.casestudy6.model;
 
+import lombok.Data;
+
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+
+@Data
+@Entity
 public class Status {
-    // new feed
+@Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    private String content;
+    private Date postDay;
+    private int status;
+    @ManyToOne
+    private Account account;
+    @OneToMany
+    private List<Img> img;
+    @OneToMany
+    private Set<Comment> comment;
+    @OneToMany
+    private Set<Likes> likes;
+
+    public Status() {
+    }
+
+    public Status(Long id, String content, Date postDay, int status, Account account, List<Img> img, Set<Comment> comment, Set<Likes> likes) {
+        this.id = id;
+        this.content = content;
+        this.postDay = postDay;
+        this.status = status;
+        this.account = account;
+        this.img = img;
+        this.comment = comment;
+        this.likes = likes;
+    }
 }
