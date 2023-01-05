@@ -11,6 +11,9 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private int status;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Role role;
     private String userName;
     private String password;
     private String  email;
@@ -26,8 +29,10 @@ public class Account {
     public Account() {
     }
 
-    public Account(Long id, String userName, String password, String email, String fistName, String lastName, String phoneNumber, String address, Date birthDay, String gender, Img img) {
+    public Account(Long id, int status, Role role, String userName, String password, String email, String fistName, String lastName, String phoneNumber, String address, Date birthDay, String gender, Img img) {
         this.id = id;
+        this.status = status;
+        this.role = role;
         this.userName = userName;
         this.password = password;
         this.email = email;
