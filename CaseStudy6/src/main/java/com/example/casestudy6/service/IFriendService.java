@@ -1,4 +1,7 @@
 package com.example.casestudy6.service;
 
-public class IFriendService {
+import java.util.List;
+
+public interface IFriendService {
+
 }

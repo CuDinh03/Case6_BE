@@ -17,7 +17,8 @@ public class Friends {
     public Friends() {
     }
 
-    public Friends(Long account1, Account account2, String status) {
+    public Friends(Long id, Long account1, Account account2, String status) {
+        this.id = id;
         this.account1 = account1;
         this.account2 = account2;
         this.status = status;
