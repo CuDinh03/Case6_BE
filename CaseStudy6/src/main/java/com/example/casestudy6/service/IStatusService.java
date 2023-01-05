@@ -13,4 +13,8 @@ public interface IStatusService<T> {
 
     void remove(Long id);
 
+    T findLastStatus();
+
+    Iterable<T> findByAccountId(Long id);
+
 }

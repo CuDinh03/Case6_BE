@@ -25,11 +25,21 @@ public class StatusService implements IStatusService<Status> {
 
     @Override
     public void save(Status status) {
-
+        statusRepo.save(status);
     }
 
     @Override
     public void remove(Long id) {
 
+    }
+
+    @Override
+    public Status findLastStatus() {
+        return statusRepo.findLastStatus();
+    }
+
+    @Override
+    public Iterable<Status> findByAccountId(Long id) {
+        return statusRepo.findByAccountId(id);
     }
 }
