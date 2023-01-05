@@ -40,8 +40,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
 
-        http.authorizeRequests().antMatchers( "/login", "/register").permitAll();
-        http.authorizeRequests().antMatchers("/users/**", "/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**").access("hasRole('ROLE_USER')")
+        http.authorizeRequests().antMatchers( "/login", "/register","/users/**").permitAll();
+        http.authorizeRequests().antMatchers( "/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
 

@@ -19,8 +19,10 @@ import java.util.Set;
 @RestController
 @CrossOrigin("*")
 @Validated
-@RequestMapping("/registers")
+//@RequestMapping("/registers")
 public class RegisterController {
+
+
     @Autowired
     AccountService accountService;
     @Autowired
@@ -62,7 +64,12 @@ public class RegisterController {
     @GetMapping("/users/{id}")
     public ResponseEntity<Account> getProfile(@PathVariable Long id) {
         Optional<Account> userOptional = this.accountService.findById(id);
+
         return userOptional.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-
+    @GetMapping("/users")
+    public ResponseEntity<Iterable<Account>> showAllUser() {
+        Iterable<Account> accounts = accountService.findAll();
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
 }
