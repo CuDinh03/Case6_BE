@@ -13,7 +13,7 @@ public class Account {
     private Long id;
     private String userName;
     private String password;
-    private String  email;
+    private String email;
     private String fistName;
     private String lastName;
     private String phoneNumber;
