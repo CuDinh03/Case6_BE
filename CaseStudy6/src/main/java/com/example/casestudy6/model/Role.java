@@ -12,13 +12,13 @@ import javax.persistence.Id;
 public class Role implements GrantedAuthority {
     @Id
     @GeneratedValue
-    private  Long id;
+    private  int id;
     private String name;
 
     public Role() {
     }
 
-    public Role(Long id, String name) {
+    public Role(int id, String name) {
         this.id = id;
         this.name = name;
     }
