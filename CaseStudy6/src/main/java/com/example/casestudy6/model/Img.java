@@ -1,25 +1,22 @@
 package com.example.casestudy6.model;
-
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
-public class Likes {
-
-
+public class Img {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
-    private Account account;
+    private String name;
 
-    public Likes() {
+    public Img() {
     }
 
-    public Likes(Long id, Account account) {
+    public Img(Long id, String name) {
         this.id = id;
-        this.account = account;
+        this.name = name;
     }
 }
