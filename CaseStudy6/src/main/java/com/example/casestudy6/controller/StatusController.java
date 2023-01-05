@@ -79,4 +79,29 @@ public class StatusController {
         statusService.save(status);
         return new ResponseEntity(statusService.findLastStatus(), HttpStatus.CREATED);
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Status> updateStatus(@PathVariable Long id, @RequestBody Status status) {
+        Optional<Status> oldStatus = statusService.findById(id);
+        if (!oldStatus.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        status.setId(oldStatus.get().getId());
+        status.setAccount(oldStatus.get().getAccount());
+        status.setPostDay(oldStatus.get().getPostDay());
+        statusService.save(status);
+        return new ResponseEntity<>(status, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Status> deleteComment(@PathVariable Long id) {
+        Optional<Status> status1 = statusService.findById(id);
+        Status status = status1.get();
+        if (!status1.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        status.setStatus(4);
+        statusService.save(status);
+        return new ResponseEntity<>(status, HttpStatus.NO_CONTENT);
+    }
 }
