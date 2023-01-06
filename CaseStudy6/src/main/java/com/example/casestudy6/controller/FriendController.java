@@ -20,9 +20,14 @@ public class FriendController {
     public ResponseEntity<List<Friends>> getAllFriends(@PathVariable String account1){
         return new ResponseEntity<>(iFriendService.getAll(account1), HttpStatus.OK);
     }
-    @PostMapping()
-    public  ResponseEntity<?> addFriend(@RequestBody Friends friends){
-        iFriendService.addFriend(friends);
+//    @PostMapping()
+//    public  ResponseEntity<?> addFriend(@RequestBody Friends friends){
+//        iFriendService.addFriend(friends);
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
+    @PostMapping ("/{account1}/{account2_id}")
+    public ResponseEntity<?> blockFriend(@PathVariable int account1, @PathVariable long account2_id){
+        iFriendService.blockFriend(account1,account2_id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
