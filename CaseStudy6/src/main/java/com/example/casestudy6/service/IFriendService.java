@@ -10,5 +10,6 @@ public interface IFriendService {
     void removeFriend(Friends friend);
     List<Friends> findFriendsByName(String name);
     void blockFriend(long account1, long account2_id);
+    List<FriendList> getMutualFriend(long account1, long account2_id);
 
 }
