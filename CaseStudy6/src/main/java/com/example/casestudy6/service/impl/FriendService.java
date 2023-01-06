@@ -20,6 +20,7 @@ public class FriendService implements IFriendService {
     @Autowired
     IAccountRepoF iFriendRepof;
     List<FriendList> listFriend ;
+    List<FriendList> listMutualFriend;
     @Override
     public List<FriendList> getAll(String account1) {
 
@@ -71,5 +72,33 @@ public class FriendService implements IFriendService {
             iFriendRepo.save(friend);
         }
 
+    }
+
+    @Override
+    public List<FriendList> getMutualFriend(long account1, long account2_id) {
+        listMutualFriend = new ArrayList<FriendList>();
+        List<Friends> list1=  iFriendRepo.getAllFriendsOfAccount1(account1);
+        List<Friends> list2=  iFriendRepo.getAllFriendsOfAccount2(account2_id);
+
+        iFriendRepo.getAllFriendsOfAccount2(account2_id);
+        for (int i = 0; i < list1.size(); i++) {
+            for (int j = 0; j < list2.size(); j++) {
+                if (list1.get(i).getAccount2().getId()==list2.get(j).getAccount2().getId()){
+                    FriendList friendList = new FriendList();
+                    friendList.setId(list1.get(i).getAccount2().getId());
+                    friendList.setFistName(list1.get(i).getAccount2().getFistName());
+                    friendList.setAddress(list1.get(i).getAccount2().getAddress());
+                    friendList.setImg(list1.get(i).getAccount2().getImg().getName());
+                    friendList.setLastName(list1.get(i).getAccount2().getLastName());
+                    friendList.setGender(list1.get(i).getAccount2().getGender());
+                    friendList.setBirthDay(list1.get(i).getAccount2().getBirthDay());
+                    friendList.setPhoneNumber(list1.get(i).getAccount2().getPhoneNumber());
+
+
+                    listMutualFriend.add(friendList);
+                }
+            }
+        }
+        return listMutualFriend;
     }
 }

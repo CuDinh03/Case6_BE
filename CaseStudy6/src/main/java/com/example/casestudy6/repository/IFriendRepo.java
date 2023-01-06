@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface IFriendRepo extends PagingAndSortingRepository<Friends,Long> {
     @Query(nativeQuery = true,value = "SELECT * FROM Friends where Friends.account1 = :account1 and Friends.status  = 2")
@@ -24,4 +25,11 @@ public interface IFriendRepo extends PagingAndSortingRepository<Friends,Long> {
     @Query(nativeQuery = true,value = "DELETE FROM friends WHERE account1= :account2_id and account2_id= :account1")
     void deleteRelationship(@Param("account2_id") long account2_id,@Param("account1") long account1);
 
+
+
+    @Query(nativeQuery=true,value = "SELECT * FROM friends WHERE account1= :account1 AND status=2")
+    List<Friends> getAllFriendsOfAccount1(@Param("account1") long account1);
+
+    @Query(nativeQuery=true,value = "SELECT * FROM friends WHERE account1= :account2_id AND status=2")
+    List<Friends> getAllFriendsOfAccount2(@Param("account2_id") long account2_id);
 }
