@@ -3,18 +3,18 @@ package com.example.casestudy6.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
 @Data
 @Entity
 public class Status {
-@Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    private Date postDay;
+    private LocalDateTime postDay;
     private int status;
     @ManyToOne
     private Account account;
@@ -28,7 +28,7 @@ public class Status {
     public Status() {
     }
 
-    public Status(Long id, String content, Date postDay, int status, Account account, List<Img> img, Set<Comment> comment, Set<Likes> likes) {
+    public Status(Long id, String content, LocalDateTime postDay, int status, Account account, List<Img> img, Set<Comment> comment, Set<Likes> likes) {
         this.id = id;
         this.content = content;
         this.postDay = postDay;
