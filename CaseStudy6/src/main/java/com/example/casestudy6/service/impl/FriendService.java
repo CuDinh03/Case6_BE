@@ -3,6 +3,7 @@ package com.example.casestudy6.service.impl;
 
 
 import com.example.casestudy6.model.Account;
+import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.model.Friends;
 import com.example.casestudy6.repository.IAccountRepoF;
 import com.example.casestudy6.repository.IFriendRepo;
@@ -10,6 +11,7 @@ import com.example.casestudy6.service.IFriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class FriendService implements IFriendService {
@@ -17,9 +19,25 @@ public class FriendService implements IFriendService {
     IFriendRepo iFriendRepo;
     @Autowired
     IAccountRepoF iFriendRepof;
+    List<FriendList> listFriend ;
     @Override
-    public List<Friends> getAll(String account1) {
-        return iFriendRepo.getAllFriends(account1) ;
+    public List<FriendList> getAll(String account1) {
+
+        listFriend = new ArrayList<FriendList>();
+        List<Friends> list = iFriendRepo.getAllFriends(account1);
+        for (int i = 0; i < list.size(); i++) {
+            FriendList friendList = new FriendList();
+            friendList.setId(list.get(i).getAccount2().getId());
+            friendList.setFistName(list.get(i).getAccount2().getFistName());
+            friendList.setAddress(list.get(i).getAccount2().getAddress());
+            friendList.setImg(list.get(i).getAccount2().getImg().getName());
+            friendList.setLastName(list.get(i).getAccount2().getLastName());
+            friendList.setGender(list.get(i).getAccount2().getGender());
+            friendList.setBirthDay(list.get(i).getAccount2().getBirthDay());
+            friendList.setPhoneNumber(list.get(i).getAccount2().getPhoneNumber());
+            listFriend.add(friendList);
+        }
+        return listFriend ;
     }
 
     @Override
