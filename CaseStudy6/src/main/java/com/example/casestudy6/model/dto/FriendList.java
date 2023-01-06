@@ -1,4 +1,4 @@
-package com.example.casestudy6.model.DTO;
+package com.example.casestudy6.model.dto;
 
 import org.springframework.stereotype.Component;
 
