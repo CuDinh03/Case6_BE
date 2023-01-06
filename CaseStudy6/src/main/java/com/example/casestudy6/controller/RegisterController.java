@@ -7,6 +7,7 @@ import com.example.casestudy6.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +28,8 @@ public class RegisterController {
     AccountService accountService;
     @Autowired
     RoleService roleService;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@Valid @RequestBody Account account, BindingResult bindingResult) {
@@ -58,6 +61,7 @@ public class RegisterController {
 //            role.setName("ROLE_USER");
 //            role.setId(1);
 //        }
+        account.setPassword(passwordEncoder.encode(account.getPassword()));
         accountService.save(account);
         return new ResponseEntity<>(account, HttpStatus.CREATED);
     }

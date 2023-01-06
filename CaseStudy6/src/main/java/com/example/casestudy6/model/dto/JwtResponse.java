@@ -1,5 +1,6 @@
 package com.example.casestudy6.model.dto;
 
+import com.example.casestudy6.model.Img;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
@@ -10,9 +11,10 @@ public class JwtResponse {
     private String userName;
     private String email;
     private String phoneNumber;
+    private Img img;
     private Collection<? extends GrantedAuthority> roles;
 
-    public JwtResponse(Long id, String token, String userName, String email, String phoneNumber, Collection<? extends GrantedAuthority> roles) {
+    public JwtResponse(Long id, String token, String userName, String email, String phoneNumber,Img img, Collection<? extends GrantedAuthority> roles) {
         this.id = id;
         this.token = token;
         this.userName = userName;
@@ -21,12 +23,13 @@ public class JwtResponse {
         this.roles = roles;
     }
 
-    public JwtResponse(String token, Long id, String userName, String email, String phoneNumber, Collection<? extends GrantedAuthority>roles) {
+    public JwtResponse(String token, Long id, String userName, String email, String phoneNumber,Img img, Collection<? extends GrantedAuthority>roles) {
         this.id = id;
         this.token = token;
         this.userName = userName;
         this.email = email;
         this.phoneNumber = phoneNumber;
+        this.img=img;
         this.roles = roles;
     }
 
@@ -68,6 +71,14 @@ public class JwtResponse {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public Img getImg() {
+        return img;
+    }
+
+    public void setImg(Img img) {
+        this.img = img;
     }
 
     public Collection<? extends GrantedAuthority> getRoles() {

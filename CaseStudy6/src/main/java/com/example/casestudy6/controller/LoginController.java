@@ -6,7 +6,6 @@ import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.JwtService;
 import com.example.casestudy6.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,6 +36,8 @@ public class LoginController {
     @Autowired
     private JwtService jwtService;
 
+
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
         if (!accountService.isRegister(account)) {
@@ -49,6 +51,6 @@ public class LoginController {
         String jwt = jwtService.createToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByUserName(account.getUserName());
-        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getEmail(), currentUser.getPhoneNumber(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), userDetails.getAuthorities()));
     }
 }
