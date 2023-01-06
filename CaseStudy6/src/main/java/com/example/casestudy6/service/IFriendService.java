@@ -7,6 +7,6 @@ public interface IFriendService {
     void addFriend(Friends friend);
     void removeFriend(Friends friend);
     List<Friends> findFriendsByName(String name);
-    void blockFriend(Friends friend);
+    void blockFriend(long account1, long account2_id);
 
 }
