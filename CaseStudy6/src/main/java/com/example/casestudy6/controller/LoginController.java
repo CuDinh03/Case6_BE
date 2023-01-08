@@ -1,6 +1,7 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
+import com.example.casestudy6.model.dto.AccLogin;
 import com.example.casestudy6.model.dto.JwtResponse;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.JwtService;
@@ -37,7 +38,6 @@ public class LoginController {
     private JwtService jwtService;
 
 
-
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Account account) {
         if (!accountService.isRegister(account)) {
@@ -51,6 +51,7 @@ public class LoginController {
         String jwt = jwtService.createToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByUserName(account.getUserName());
-        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), userDetails.getUsername(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), userDetails.getAuthorities()));
     }
 }
+

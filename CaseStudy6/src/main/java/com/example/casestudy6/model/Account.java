@@ -26,8 +26,8 @@ public class Account implements Serializable {
 
     private int status;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
     @Column(nullable = false)
     @NotBlank(message = "password không được để trống")

@@ -23,8 +23,6 @@ import java.util.*;
 public class RegisterController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
     AccountService accountService;
     @Autowired
     RoleService roleService;
@@ -45,39 +43,6 @@ public class RegisterController {
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
 
-//    @PostMapping("/register")
-//    public ResponseEntity<?> registerUser(@RequestBody SignUpForm signUpForm) {
-//
-//        Iterable<Account> accounts = accountService.findAll();
-//        for (Account currentUser : accounts) {
-//            if (currentUser.getUserName().equals(signUpForm.getUserName())) {
-//                return new ResponseEntity<>("Tên người dùng đã tồn tại", HttpStatus.BAD_REQUEST);
-//            }
-//            if (currentUser.getEmail().equals(signUpForm.getEmail())) {
-//                return new ResponseEntity<>("Email đã tồn tại", HttpStatus.BAD_REQUEST);
-//            }
-//        }
-//        Account account1 = new Account();
-//
-////         Creating user's account
-//        account1.setUserName(signUpForm.getUserName());
-//        account1.setEmail(signUpForm.getEmail());
-//        account1.setPassword(signUpForm.getPassword());
-//        account1.setPhoneNumber(signUpForm.getPhoneNumber());
-//        account1.setAddress(signUpForm.getAddress());
-//        account1.setBirthDay(signUpForm.getBirthDay());
-//        account1.setGender(signUpForm.getGender());
-//        account1.setFistName(signUpForm.getFistName());
-//        account1.setLastName(signUpForm.getLastName());
-//
-//        Role role = new Role();
-//        role.setId(2);
-//        account1.setRole(role);
-//        accountService.save(account1);
-//
-//        return new ResponseEntity<>(new ResponseMessage("Success"), HttpStatus.OK);
-//    }
-
     @PostMapping("/register")
     public ResponseEntity<List<Boolean>> register(@RequestBody SignUpForm signUpForm) {
         List<Boolean> result = new ArrayList<>();
@@ -85,8 +50,6 @@ public class RegisterController {
         Account appUserByName = accountService.findByUserName(signUpForm.getUserName());
         boolean checkUserName = appUserByName == null;
         boolean checkMail = appUserByEmail == null;
-//        boolean checkMail = accountService.existsByEmail(signUpForm.getEmail());
-//        boolean checkUserName = accountService.existsByUserName(signUpForm.getUserName());
         if (checkUserName && checkMail) {
             Account account1 = new Account();
 //         Creating user's account
@@ -99,10 +62,11 @@ public class RegisterController {
             account1.setGender(signUpForm.getGender());
             account1.setFistName(signUpForm.getFistName());
             account1.setLastName(signUpForm.getLastName());
-
+            Set<Role> roles = new HashSet<>();
             Role role = new Role();
             role.setId(2);
-            account1.setRole(role);
+            roles.add(role);
+            account1.setRoles(roles);
             accountService.save(account1);
             result.add(true);
             result.add(true);

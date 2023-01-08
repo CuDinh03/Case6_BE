@@ -61,8 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
-//        http.authorizeRequests()
-//                .antMatchers(HttpMethod.OPTIONS).permitAll();
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS).permitAll();
         http.authorizeRequests().antMatchers("/**", "/login", "/register", "/users/**").permitAll();
         http.authorizeRequests().antMatchers("/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()

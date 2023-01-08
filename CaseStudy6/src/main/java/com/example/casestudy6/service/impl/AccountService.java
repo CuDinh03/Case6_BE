@@ -86,7 +86,7 @@ public class AccountService implements IAccountService {
             throw new UsernameNotFoundException(userName);
         }
         if (this.checkLogin(account)) {
-            return new User(account.getUserName(), account.getPassword(), (Collection<? extends GrantedAuthority>) account.getRole());
+            return new User(account.getUserName(), account.getPassword(), account.getRoles());
         }
         boolean enable = false;
         boolean accountNonExpired = false;
