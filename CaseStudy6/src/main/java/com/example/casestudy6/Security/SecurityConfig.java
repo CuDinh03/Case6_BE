@@ -5,6 +5,7 @@ import com.example.casestudy6.service.impl.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -22,12 +23,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//    @Bean
+    //    @Bean
 //    public AccountService accountService() {
 //        return new AccountService();
 //    }
     @Autowired
     AccountService accountService;
+
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
         return new JwtAuthenticationFilter();
@@ -40,6 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthenticationManager authenticationManager() throws Exception {
         return super.authenticationManager();
     }
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder(10);
@@ -58,7 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
-
+//        http.authorizeRequests()
+//                .antMatchers(HttpMethod.OPTIONS).permitAll();
         http.authorizeRequests().antMatchers("/**", "/login", "/register", "/users/**").permitAll();
         http.authorizeRequests().antMatchers("/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()

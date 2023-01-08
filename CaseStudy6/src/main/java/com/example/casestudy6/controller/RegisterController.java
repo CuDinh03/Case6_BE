@@ -2,28 +2,28 @@ package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
 import com.example.casestudy6.model.Role;
+import com.example.casestudy6.model.dto.ResponseMessage;
+import com.example.casestudy6.model.dto.SignUpForm;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+
+import java.util.*;
 
 @RestController
 @CrossOrigin("*")
 @Validated
-//@RequestMapping("/registers")
 public class RegisterController {
 
-
+    @Autowired
+    private AuthenticationManager authenticationManager;
     @Autowired
     AccountService accountService;
     @Autowired
@@ -31,49 +31,85 @@ public class RegisterController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @PostMapping("/register")
-    public ResponseEntity<?> createUser(@Valid @RequestBody Account account, BindingResult bindingResult) {
-        if (bindingResult.hasFieldErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-        Iterable<Account> accounts = accountService.findAll();
-        for (Account currentUser : accounts) {
-            if (currentUser.getUserName().equals(account.getUserName())) {
-                return new ResponseEntity<>("Tên người dùng đã tồn tại", HttpStatus.BAD_REQUEST);
-            }
-            if (currentUser.getEmail().equals(account.getEmail())) {
-                return new ResponseEntity<>("Email đã tồn tại", HttpStatus.BAD_REQUEST);
-            }
-        }
-        Role role = new Role();
-        role.setName("ROLE_USER");
-        role.setId(2);
 
-//        return new ResponseEntity<>(account, HttpStatus.OK);
-//        if (account.getRole() != null) {
-//            Role role = roleService.findByName("ROLE_ADMIN");
-//            Set<Role> roles = new HashSet<>();
-//            roles.add(role);
-//            account.setRole(role);
-//        } else {
-//            Role role1 = roleService.findByName("ROLE_USER");
-//            Set<Role> roles1 = new HashSet<>();
-//            role.setName("ROLE_USER");
-//            role.setId(1);
-//        }
-        account.setPassword(passwordEncoder.encode(account.getPassword()));
-        accountService.save(account);
-        return new ResponseEntity<>(account, HttpStatus.CREATED);
-    }
     @GetMapping("/users/{id}")
     public ResponseEntity<Account> getProfile(@PathVariable Long id) {
         Optional<Account> userOptional = this.accountService.findById(id);
 
         return userOptional.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
+
     @GetMapping("/users")
     public ResponseEntity<Iterable<Account>> showAllUser() {
         Iterable<Account> accounts = accountService.findAll();
         return new ResponseEntity<>(accounts, HttpStatus.OK);
+    }
+
+//    @PostMapping("/register")
+//    public ResponseEntity<?> registerUser(@RequestBody SignUpForm signUpForm) {
+//
+//        Iterable<Account> accounts = accountService.findAll();
+//        for (Account currentUser : accounts) {
+//            if (currentUser.getUserName().equals(signUpForm.getUserName())) {
+//                return new ResponseEntity<>("Tên người dùng đã tồn tại", HttpStatus.BAD_REQUEST);
+//            }
+//            if (currentUser.getEmail().equals(signUpForm.getEmail())) {
+//                return new ResponseEntity<>("Email đã tồn tại", HttpStatus.BAD_REQUEST);
+//            }
+//        }
+//        Account account1 = new Account();
+//
+////         Creating user's account
+//        account1.setUserName(signUpForm.getUserName());
+//        account1.setEmail(signUpForm.getEmail());
+//        account1.setPassword(signUpForm.getPassword());
+//        account1.setPhoneNumber(signUpForm.getPhoneNumber());
+//        account1.setAddress(signUpForm.getAddress());
+//        account1.setBirthDay(signUpForm.getBirthDay());
+//        account1.setGender(signUpForm.getGender());
+//        account1.setFistName(signUpForm.getFistName());
+//        account1.setLastName(signUpForm.getLastName());
+//
+//        Role role = new Role();
+//        role.setId(2);
+//        account1.setRole(role);
+//        accountService.save(account1);
+//
+//        return new ResponseEntity<>(new ResponseMessage("Success"), HttpStatus.OK);
+//    }
+
+    @PostMapping("/register")
+    public ResponseEntity<List<Boolean>> register(@RequestBody SignUpForm signUpForm) {
+        List<Boolean> result = new ArrayList<>();
+        Account appUserByEmail = accountService.findByEmail(signUpForm.getEmail());
+        Account appUserByName = accountService.findByUserName(signUpForm.getUserName());
+        boolean checkUserName = appUserByName == null;
+        boolean checkMail = appUserByEmail == null;
+//        boolean checkMail = accountService.existsByEmail(signUpForm.getEmail());
+//        boolean checkUserName = accountService.existsByUserName(signUpForm.getUserName());
+        if (checkUserName && checkMail) {
+            Account account1 = new Account();
+//         Creating user's account
+            account1.setUserName(signUpForm.getUserName());
+            account1.setEmail(signUpForm.getEmail());
+            account1.setPassword(signUpForm.getPassword());
+            account1.setPhoneNumber(signUpForm.getPhoneNumber());
+            account1.setAddress(signUpForm.getAddress());
+            account1.setBirthDay(signUpForm.getBirthDay());
+            account1.setGender(signUpForm.getGender());
+            account1.setFistName(signUpForm.getFistName());
+            account1.setLastName(signUpForm.getLastName());
+
+            Role role = new Role();
+            role.setId(2);
+            account1.setRole(role);
+            accountService.save(account1);
+            result.add(true);
+            result.add(true);
+        } else {
+            result.add(checkUserName);
+            result.add(checkMail);
+        }
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

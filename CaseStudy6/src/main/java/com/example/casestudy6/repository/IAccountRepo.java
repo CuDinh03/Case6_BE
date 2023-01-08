@@ -5,4 +5,8 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface IAccountRepo extends PagingAndSortingRepository<Account, Long> {
     Account findByUserName(String userName);
+    Account findByEmail(String email);
+    Boolean existsByEmail(String email);
+    Boolean existsByUserName(String userName);
+
 }

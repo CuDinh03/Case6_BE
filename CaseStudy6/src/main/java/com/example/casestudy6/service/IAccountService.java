@@ -14,10 +14,13 @@ public interface IAccountService extends UserDetailsService {
 
     Account findByUserName(String userName);
 
+    Account findByEmail(String email);
+
     Optional<Account> findById(Long id);
 
     boolean checkLogin(Account account);
 
     boolean isRegister(Account account);
+
 
 }

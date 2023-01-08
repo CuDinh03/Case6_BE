@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 
 @Data
 @Entity
@@ -46,7 +47,7 @@ public class Account implements Serializable {
     private String address;
 
     @Past(message = "Ngày sinh phải trước thời gian hiện tại")
-    @NotNull(message = "không được để trống")
+//    @NotNull(message = "không được để trống")
     private Date birthDay;
     private String gender;
     @OneToOne
@@ -55,19 +56,4 @@ public class Account implements Serializable {
     public Account() {
     }
 
-    public Account(Long id, int status, Role role, String userName, String password, String email, String fistName, String lastName, String phoneNumber, String address, Date birthDay, String gender, Img img) {
-        this.id = id;
-        this.status = status;
-        this.role = role;
-        this.userName = userName;
-        this.password = password;
-        this.email = email;
-        this.fistName = fistName;
-        this.lastName = lastName;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.birthDay = birthDay;
-        this.gender = gender;
-        this.img = img;
-    }
 }
