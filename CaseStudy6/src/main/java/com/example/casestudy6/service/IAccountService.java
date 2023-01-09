@@ -11,9 +11,7 @@ public interface IAccountService extends UserDetailsService {
     void save(Account account);
 
     Iterable<Account> findAll();
-
     Account findByUserName(String userName);
-
     Account findByEmail(String email);
 
     Optional<Account> findById(Long id);
@@ -21,6 +19,5 @@ public interface IAccountService extends UserDetailsService {
     boolean checkLogin(Account account);
 
     boolean isRegister(Account account);
-
 
 }

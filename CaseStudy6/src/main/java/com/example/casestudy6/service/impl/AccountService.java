@@ -19,15 +19,6 @@ public class AccountService implements IAccountService {
     IAccountRepo iAccountRepo;
 
 
-    public Boolean existsByEmail(String email) {
-        return iAccountRepo.existsByEmail(email);
-    }
-
-
-    public Boolean existsByUserName(String userName) {
-        return iAccountRepo.existsByUserName(userName);
-    }
-
     @Override
     public void save(Account account) {
         iAccountRepo.save(account);
