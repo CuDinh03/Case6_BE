@@ -6,10 +6,16 @@ import com.example.casestudy6.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Service
 public class RoleService implements IRoleService {
     @Autowired
     private IRoleRepo iRoleRepo;
+
+    public Set<Role> findById(int id){
+        return  iRoleRepo.findById(id);
+    }
 
     @Override
     public Iterable<Role> findAll() {
