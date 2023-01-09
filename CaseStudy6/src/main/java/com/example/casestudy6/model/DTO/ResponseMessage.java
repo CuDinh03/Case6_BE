@@ -1,4 +1,4 @@
-package com.example.casestudy6.model.dto;
+package com.example.casestudy6.model.DTO;
 
 public class ResponseMessage {
     private String message;
