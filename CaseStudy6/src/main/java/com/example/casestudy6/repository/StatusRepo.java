@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface StatusRepo extends JpaRepository<Status, Long> {
@@ -19,4 +20,7 @@ public interface StatusRepo extends JpaRepository<Status, Long> {
 
     @Query(value = "select * from status order by id desc limit 1", nativeQuery = true)
     Status findLastStatus();
+
+    @Query(value = "select * from status where id = :id and status <> 4 order by post_day asc ", nativeQuery = true)
+    Optional<Status> findById(@Param("id") Long id);
 }

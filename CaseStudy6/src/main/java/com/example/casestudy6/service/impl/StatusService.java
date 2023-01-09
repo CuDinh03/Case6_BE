@@ -39,7 +39,7 @@ public class StatusService implements IStatusService<Status> {
     }
 
     @Override
-    public Iterable<Status> findByAccountId(Long id) {
+    public Iterable<Status> findAllByAccountId(Long id) {
         return statusRepo.findByAccountId(id);
     }
 }
