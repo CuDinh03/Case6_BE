@@ -42,8 +42,24 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public void addFriend(Friends friend) {
+    public void addFriend(long account1, long account2_id) {
+        Friends friend = new Friends();
+        friend.setAccount1(account1);
+        friend.setStatus(1);
+        Account account2 = iFriendRepof.getFriendToBlock(account2_id);
+        friend.setAccount2(account2);
+        iFriendRepo.save(friend);
+    }
 
+    @Override
+    public void acceptRequest(long account1, long account2_id) {
+        iFriendRepo.updateStatus(account2_id,account1);
+        Friends friend = new Friends();
+        friend.setAccount1(account1);
+        friend.setStatus(2);
+        Account account2 = iFriendRepof.getFriendToBlock(account2_id);
+        friend.setAccount2(account2);
+        iFriendRepo.save(friend);
     }
 
     @Override
@@ -85,6 +101,7 @@ public class FriendService implements IFriendService {
             for (int j = 0; j < list2.size(); j++) {
                 if (list1.get(i).getAccount2().getId()==list2.get(j).getAccount2().getId()){
                     FriendList friendList = new FriendList();
+                    friendList.setUsername(list1.get(i).getAccount2().getUserName());
                     friendList.setId(list1.get(i).getAccount2().getId());
                     friendList.setFistName(list1.get(i).getAccount2().getFistName());
                     friendList.setAddress(list1.get(i).getAccount2().getAddress());
@@ -105,7 +122,7 @@ public class FriendService implements IFriendService {
     @Override
     public FriendList getAccountByUserName(String name) {
         FriendList friendList = new FriendList();
-
+        friendList.setUsername(iFriendRepof.findAccountByUserName(name).getUserName());
         friendList.setId(iFriendRepof.findAccountByUserName(name).getId());
         friendList.setFistName(iFriendRepof.findAccountByUserName(name).getFistName());
         friendList.setLastName(iFriendRepof.findAccountByUserName(name).getLastName());
@@ -114,6 +131,23 @@ public class FriendService implements IFriendService {
         friendList.setBirthDay(iFriendRepof.findAccountByUserName(name).getBirthDay());
         friendList.setGender(iFriendRepof.findAccountByUserName(name).getGender());
         friendList.setImg(iFriendRepof.findAccountByUserName(name).getImg().getName());
+
+        return friendList;
+    }
+
+    @Override
+    public FriendList getAccountById(long id) {
+        FriendList friendList = new FriendList();
+
+        friendList.setId(iFriendRepof.findAccountById(id).getId());
+        friendList.setFistName(iFriendRepof.findAccountById(id).getFistName());
+        friendList.setLastName(iFriendRepof.findAccountById(id).getLastName());
+        friendList.setAddress(iFriendRepof.findAccountById(id).getAddress());
+        friendList.setPhoneNumber(iFriendRepof.findAccountById(id).getPhoneNumber());
+        friendList.setBirthDay(iFriendRepof.findAccountById(id).getBirthDay());
+        friendList.setGender(iFriendRepof.findAccountById(id).getGender());
+        friendList.setImg(iFriendRepof.findAccountById(id).getImg().getName());
+        friendList.setUsername(iFriendRepof.findAccountById(id).getUserName());
 
         return friendList;
     }
