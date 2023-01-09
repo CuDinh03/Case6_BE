@@ -12,6 +12,7 @@ public class FriendList {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String username;
     private String fistName;
     private String lastName;
     private Date birthDay;
@@ -23,8 +24,9 @@ public class FriendList {
     public FriendList() {
     }
 
-    public FriendList(Long id, String fistName, String lastName, Date birthDay, String img, String gender, String address, String phoneNumber) {
+    public FriendList(Long id, String username, String fistName, String lastName, Date birthDay, String img, String gender, String address, String phoneNumber) {
         this.id = id;
+        this.username = username;
         this.fistName = fistName;
         this.lastName = lastName;
         this.birthDay = birthDay;
@@ -32,6 +34,14 @@ public class FriendList {
         this.gender = gender;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getImg() {
