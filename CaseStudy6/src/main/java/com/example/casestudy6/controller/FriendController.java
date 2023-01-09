@@ -17,7 +17,7 @@ public class FriendController {
     @Autowired
     IFriendService iFriendService;
     @GetMapping("/{account1}")
-    public ResponseEntity<?> getAllFriends(@PathVariable String account1){
+    public ResponseEntity<List<FriendList>> getAllFriends(@PathVariable String account1){
         return new ResponseEntity<>(iFriendService.getAll(account1), HttpStatus.OK);
     }
     @GetMapping("/profile/{username}")
