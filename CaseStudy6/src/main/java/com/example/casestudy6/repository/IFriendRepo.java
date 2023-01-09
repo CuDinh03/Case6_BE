@@ -32,4 +32,13 @@ public interface IFriendRepo extends PagingAndSortingRepository<Friends,Long> {
 
     @Query(nativeQuery=true,value = "SELECT * FROM friends WHERE account1= :account2_id AND status=2")
     List<Friends> getAllFriendsOfAccount2(@Param("account2_id") long account2_id);
+
+@Transactional
+@Modifying
+    @Query(nativeQuery=true,value = "INSERT INTO friends (account1, status,account2_id) VALUES (:id1, 1, :id2)")
+    void sendRequest(@Param("id1") long id1, @Param("id2") long id2);
+    @Transactional
+    @Modifying
+    @Query(nativeQuery=true,value = "UPDATE friends SET status = 2 WHERE account1= :account1 AND account2_id =:account2_id")
+    void updateStatus(@Param("account1") long account1, @Param("account2_id" ) long account2_id);
 }
