@@ -9,4 +9,5 @@ public interface IRoleService {
     void save(Role role);
 
     Role findByName(String name);
+
 }
