@@ -15,6 +15,6 @@ public interface IStatusService<T> {
 
     T findLastStatus();
 
-    Iterable<T> findByAccountId(Long id);
+    Iterable<T> findAllByAccountId(Long id);
 
 }
