@@ -1,6 +1,6 @@
 package com.example.casestudy6.controller;
 
-import com.example.casestudy6.model.dto.FriendList;
+import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.service.IFriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ public class MutualFriendController {
     IFriendService iFriendService;
     @GetMapping("/{account1}/{account2_id}")
     public ResponseEntity<List<FriendList>> getMUtualFriend(@PathVariable long account1, @PathVariable long account2_id){
-        return new ResponseEntity<List<FriendList>>(iFriendService.getMutualFriend(account1, account2_id), HttpStatus.OK);
+        return new ResponseEntity<>(iFriendService.getMutualFriend(account1, account2_id), HttpStatus.OK);
     }
 
 }

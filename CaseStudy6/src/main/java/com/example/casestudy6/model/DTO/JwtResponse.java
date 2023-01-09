@@ -1,4 +1,4 @@
-package com.example.casestudy6.model.dto;
+package com.example.casestudy6.model.DTO;
 
 import com.example.casestudy6.model.Img;
 import org.springframework.security.core.GrantedAuthority;
