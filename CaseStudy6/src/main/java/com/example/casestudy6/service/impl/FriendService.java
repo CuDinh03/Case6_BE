@@ -3,7 +3,7 @@ package com.example.casestudy6.service.impl;
 
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.dto.FriendList;
+import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.model.Friends;
 import com.example.casestudy6.repository.IAccountRepoF;
 import com.example.casestudy6.repository.IFriendRepo;
@@ -100,5 +100,21 @@ public class FriendService implements IFriendService {
             }
         }
         return listMutualFriend;
+    }
+
+    @Override
+    public FriendList getAccountByUserName(String name) {
+        FriendList friendList = new FriendList();
+
+        friendList.setId(iFriendRepof.findAccountByUserName(name).getId());
+        friendList.setFistName(iFriendRepof.findAccountByUserName(name).getFistName());
+        friendList.setLastName(iFriendRepof.findAccountByUserName(name).getLastName());
+        friendList.setAddress(iFriendRepof.findAccountByUserName(name).getAddress());
+        friendList.setPhoneNumber(iFriendRepof.findAccountByUserName(name).getPhoneNumber());
+        friendList.setBirthDay(iFriendRepof.findAccountByUserName(name).getBirthDay());
+        friendList.setGender(iFriendRepof.findAccountByUserName(name).getGender());
+        friendList.setImg(iFriendRepof.findAccountByUserName(name).getImg().getName());
+
+        return friendList;
     }
 }
