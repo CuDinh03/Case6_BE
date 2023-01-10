@@ -38,7 +38,7 @@ public class Account implements Serializable {
     @NotBlank(message = "email không để trống")
     private String email;
 
-    private String fistName;
+    private String firstName;
     private String lastName;
 
     @Column(nullable = false)

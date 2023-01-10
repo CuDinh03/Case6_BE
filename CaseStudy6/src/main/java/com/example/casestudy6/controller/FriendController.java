@@ -23,8 +23,16 @@ public class FriendController {
         return new ResponseEntity<>(iFriendService.getAccountByUserName(username), HttpStatus.OK);
     }
     @GetMapping("/profileId/{id}")
-    public  ResponseEntity<FriendList> getAccountId(@PathVariable long id){
+    public  ResponseEntity<FriendList> getAccountId(@PathVariable long id) {
         return new ResponseEntity<>(iFriendService.getAccountById(id), HttpStatus.OK);
+    }
+    @GetMapping("/requestSent/{id}")
+    public ResponseEntity<List<FriendList>> getRequestSent(@PathVariable long id){
+        return new ResponseEntity<>(iFriendService.listRequestSent(id), HttpStatus.OK);
+    }
+    @GetMapping("/requestReceived/{id}")
+    public ResponseEntity<List<FriendList>> getRequestReceived(@PathVariable long id){
+        return new ResponseEntity<>(iFriendService.listRequestReceived(id), HttpStatus.OK);
     }
     @PostMapping("/addFriend/{account1}/{account2_id}")
     public  ResponseEntity<?> addFriend(@PathVariable long account1,@PathVariable long account2_id){
@@ -40,5 +48,14 @@ public class FriendController {
     public ResponseEntity<?> acceptRequest(@PathVariable int account1,@PathVariable long account2_id){
         iFriendService.acceptRequest(account1,account2_id);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @DeleteMapping("/delete/{account1}/{account2_id}")
+    public ResponseEntity<?> remove(@PathVariable int account1,@PathVariable long account2_id){
+        iFriendService.removeFriend(account1,account2_id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/find/{any}")
+    public ResponseEntity<List<FriendList>> find(@PathVariable String any){
+        return new ResponseEntity<>(iFriendService.getAccountByAny(any),HttpStatus.OK);
     }
 }
