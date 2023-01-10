@@ -60,7 +60,7 @@ public class RegisterController {
             account1.setAddress(signUpForm.getAddress());
             account1.setBirthDay(signUpForm.getBirthDay());
             account1.setGender(signUpForm.getGender());
-            account1.setFistName(signUpForm.getFistName());
+            account1.setFirstName(signUpForm.getFistName());
             account1.setLastName(signUpForm.getLastName());
             Set<Role> roles = new HashSet<>();
             Role role = new Role();

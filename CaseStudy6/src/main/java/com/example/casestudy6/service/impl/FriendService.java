@@ -30,7 +30,7 @@ public class FriendService implements IFriendService {
             FriendList friendList = new FriendList();
             friendList.setStatus(list.get(i).getAccount2().getStatus());
             friendList.setId(list.get(i).getAccount2().getId());
-            friendList.setFistName(list.get(i).getAccount2().getFistName());
+            friendList.setFirstName(list.get(i).getAccount2().getFirstName());
             friendList.setAddress(list.get(i).getAccount2().getAddress());
             friendList.setImg(list.get(i).getAccount2().getImg().getName());
             friendList.setLastName(list.get(i).getAccount2().getLastName());
@@ -71,7 +71,7 @@ public class FriendService implements IFriendService {
             FriendList friendList = new FriendList();
             friendList.setStatus(list.get(i).getAccount2().getStatus());
             friendList.setId(list.get(i).getAccount2().getId());
-            friendList.setFistName(list.get(i).getAccount2().getFistName());
+            friendList.setFirstName(list.get(i).getAccount2().getFirstName());
             friendList.setAddress(list.get(i).getAccount2().getAddress());
             friendList.setImg(list.get(i).getAccount2().getImg().getName());
             friendList.setLastName(list.get(i).getAccount2().getLastName());
@@ -92,7 +92,7 @@ public class FriendService implements IFriendService {
             FriendList friendList = new FriendList();
             friendList.setStatus(list.get(i).getAccount2().getStatus());
             friendList.setId(list.get(i).getAccount2().getId());
-            friendList.setFistName(list.get(i).getAccount2().getFistName());
+            friendList.setFirstName(list.get(i).getAccount2().getFirstName());
             friendList.setAddress(list.get(i).getAccount2().getAddress());
             friendList.setImg(list.get(i).getAccount2().getImg().getName());
             friendList.setLastName(list.get(i).getAccount2().getLastName());
@@ -148,7 +148,7 @@ public class FriendService implements IFriendService {
                     friendList.setStatus(list1.get(i).getAccount2().getStatus());
                     friendList.setUsername(list1.get(i).getAccount2().getUserName());
                     friendList.setId(list1.get(i).getAccount2().getId());
-                    friendList.setFistName(list1.get(i).getAccount2().getFistName());
+                    friendList.setFirstName(list1.get(i).getAccount2().getFirstName());
                     friendList.setAddress(list1.get(i).getAccount2().getAddress());
                     friendList.setImg(list1.get(i).getAccount2().getImg().getName());
                     friendList.setLastName(list1.get(i).getAccount2().getLastName());
@@ -170,7 +170,7 @@ public class FriendService implements IFriendService {
         friendList.setStatus(iFriendRepof.findAccountByUserName(name).getStatus());
         friendList.setUsername(iFriendRepof.findAccountByUserName(name).getUserName());
         friendList.setId(iFriendRepof.findAccountByUserName(name).getId());
-        friendList.setFistName(iFriendRepof.findAccountByUserName(name).getFistName());
+        friendList.setFirstName(iFriendRepof.findAccountByUserName(name).getFirstName());
         friendList.setLastName(iFriendRepof.findAccountByUserName(name).getLastName());
         friendList.setAddress(iFriendRepof.findAccountByUserName(name).getAddress());
         friendList.setPhoneNumber(iFriendRepof.findAccountByUserName(name).getPhoneNumber());
@@ -186,7 +186,7 @@ public class FriendService implements IFriendService {
         FriendList friendList = new FriendList();
         friendList.setStatus(iFriendRepof.findAccountById(id).getStatus());
         friendList.setId(iFriendRepof.findAccountById(id).getId());
-        friendList.setFistName(iFriendRepof.findAccountById(id).getFistName());
+        friendList.setFirstName(iFriendRepof.findAccountById(id).getFirstName());
         friendList.setLastName(iFriendRepof.findAccountById(id).getLastName());
         friendList.setAddress(iFriendRepof.findAccountById(id).getAddress());
         friendList.setPhoneNumber(iFriendRepof.findAccountById(id).getPhoneNumber());
