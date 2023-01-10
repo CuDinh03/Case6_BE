@@ -25,7 +25,10 @@ public class FriendService implements IFriendService {
     public List<FriendList> getAll(String account1) {
 
         listFriend = new ArrayList<FriendList>();
+
+
         List<Friends> list = iFriendRepo.getAllFriends(account1);
+
         for (int i = 0; i < list.size(); i++) {
             FriendList friendList = new FriendList();
             friendList.setStatus(list.get(i).getAccount2().getStatus());
@@ -199,7 +202,7 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public List<FriendList> getAccountByAny(String any) {
+    public List<FriendList> getAccountByAnyT(String any) {
         listFriend = new ArrayList<FriendList>();
         List<Account> list = iFriendRepof.findByAny(any);
         for (int i = 0; i < list.size(); i++) {
@@ -218,5 +221,17 @@ public class FriendService implements IFriendService {
 
         }
         return listFriend;
+    }
+
+    @Override
+    public int isFriends(long account1, long account2_id) {
+        List<Friends> friendList = iFriendRepo.isFriends(account1, account2_id);
+      if(friendList.size()==0){
+          return 0;
+      }else{
+          if (friendList.get(0).getStatus()==1)
+          {return 1;}
+          else return 2;
+      }
     }
 }

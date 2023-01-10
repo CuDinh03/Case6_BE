@@ -58,6 +58,10 @@ public class FriendController {
     }
     @GetMapping("/find/{any}")
     public ResponseEntity<List<FriendList>> find(@PathVariable String any){
-        return new ResponseEntity<>(iFriendService.getAccountByAny(any),HttpStatus.OK);
+        return new ResponseEntity<>(iFriendService.getAccountByAnyT(any),HttpStatus.OK);
+    }
+    @GetMapping("/isFriends/{id1}/{id2}")
+    public ResponseEntity<Integer> isFriends(@PathVariable long id1,@PathVariable long id2){
+        return new ResponseEntity<>(iFriendService.isFriends(id1,id2),HttpStatus.OK);
     }
 }
