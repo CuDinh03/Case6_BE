@@ -197,4 +197,26 @@ public class FriendService implements IFriendService {
 
         return friendList;
     }
+
+    @Override
+    public List<FriendList> getAccountByAny(String any) {
+        listFriend = new ArrayList<FriendList>();
+        List<Account> list = iFriendRepof.findByAny(any);
+        for (int i = 0; i < list.size(); i++) {
+            FriendList friendList = new FriendList();
+            friendList.setStatus(list.get(i).getStatus());
+            friendList.setId(list.get(i).getId());
+            friendList.setFirstName(list.get(i).getFirstName());
+            friendList.setLastName(list.get(i).getLastName());
+            friendList.setAddress(list.get(i).getAddress());
+            friendList.setPhoneNumber(list.get(i).getPhoneNumber());
+            friendList.setBirthDay(list.get(i).getBirthDay());
+            friendList.setGender(list.get(i).getGender());
+            friendList.setImg(list.get(i).getImg().getName());
+            friendList.setUsername(list.get(i).getUserName());
+            listFriend.add(friendList);
+
+        }
+        return listFriend;
+    }
 }

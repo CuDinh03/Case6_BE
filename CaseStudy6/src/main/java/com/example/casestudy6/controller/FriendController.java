@@ -56,4 +56,8 @@ public class FriendController {
         iFriendService.removeFriend(account1,account2_id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+    @GetMapping("/find/{any}")
+    public ResponseEntity<List<FriendList>> find(@PathVariable String any){
+        return new ResponseEntity<>(iFriendService.getAccountByAny(any),HttpStatus.OK);
+    }
 }

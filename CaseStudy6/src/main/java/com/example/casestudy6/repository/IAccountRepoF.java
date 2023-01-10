@@ -15,6 +15,6 @@ public interface IAccountRepoF extends PagingAndSortingRepository<Account,Long> 
     Account findAccountByUserName(@Param("user_name") String user);
     @Query(nativeQuery = true,value = "SELECT * FROM Account WHERE id=:id")
     Account findAccountById(@Param("id") long id);
-    @Query(nativeQuery = true,value = "SELECT * FROM Account WHERE first_name = :first_name or last_name =:first_name")
-    List<Account> findByName(@Param("first_name") String first_name);
+    @Query(nativeQuery = true,value = "SELECT * FROM account where first_name LIKE  OR last_name LIKE ('%'+ :any +'%') OR phone_number LIKE ('%'+ :any +'%')")
+    List<Account> findByAny(@Param("any") String any);
 }
