@@ -1,6 +1,7 @@
 package com.example.casestudy6.repository;
 
 import com.example.casestudy6.model.Friends;
+import com.example.casestudy6.model.dto.FriendList;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -41,4 +42,8 @@ public interface IFriendRepo extends PagingAndSortingRepository<Friends,Long> {
     @Modifying
     @Query(nativeQuery=true,value = "UPDATE friends SET status = 2 WHERE account1= :account1 AND account2_id =:account2_id")
     void updateStatus(@Param("account1") long account1, @Param("account2_id" ) long account2_id);
+    @Query(nativeQuery = true,value = "SELECT *FROM friends WHERE account1 = :account1 AND status = 1")
+    List<Friends> listRequestSent(@Param("account1") long account1);
+    @Query(nativeQuery = true,value = "SELECT * FROM friends WHERE account2_id =:account2_id AND status = 1")
+    List<Friends> listRequestReceived(@Param("account2_id") long account2);
 }

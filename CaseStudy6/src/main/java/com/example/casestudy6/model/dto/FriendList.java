@@ -20,11 +20,20 @@ public class FriendList {
     private String gender;
     private String address;
     private String phoneNumber;
+    private int status;
 
     public FriendList() {
     }
 
-    public FriendList(Long id, String username, String fistName, String lastName, Date birthDay, String img, String gender, String address, String phoneNumber) {
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public FriendList(Long id, String username, String fistName, String lastName, Date birthDay, String img, String gender, String address, String phoneNumber, int status) {
         this.id = id;
         this.username = username;
         this.fistName = fistName;
@@ -34,6 +43,7 @@ public class FriendList {
         this.gender = gender;
         this.address = address;
         this.phoneNumber = phoneNumber;
+        this.status = status;
     }
 
     public String getUsername() {
