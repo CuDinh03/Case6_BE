@@ -140,11 +140,11 @@ public class FriendService implements IFriendService {
         List<Friends> list1=  iFriendRepo.getAllFriendsOfAccount1(account1);
         List<Friends> list2=  iFriendRepo.getAllFriendsOfAccount2(account2_id);
 
-        iFriendRepo.getAllFriendsOfAccount2(account2_id);
         for (int i = 0; i < list1.size(); i++) {
             for (int j = 0; j < list2.size(); j++) {
                 if (list1.get(i).getAccount2().getId()==list2.get(j).getAccount2().getId()){
                     FriendList friendList = new FriendList();
+
                     friendList.setStatus(list1.get(i).getAccount2().getStatus());
                     friendList.setUsername(list1.get(i).getAccount2().getUserName());
                     friendList.setId(list1.get(i).getAccount2().getId());

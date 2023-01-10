@@ -1,7 +1,6 @@
 package com.example.casestudy6.repository;
 
 import com.example.casestudy6.model.Friends;
-import com.example.casestudy6.model.dto.FriendList;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;

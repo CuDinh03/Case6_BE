@@ -11,10 +11,6 @@ public interface IAccountRepoF extends PagingAndSortingRepository<Account,Long> 
     @Query(nativeQuery = true,value = "SELECT * FROM Account WHERE id= :account2_id")
     Account getFriendToBlock(@Param("account2_id") long account2_id);
 
-
-
-
-
     @Query(nativeQuery = true,value = "SELECT * FROM Account WHERE user_name= :user_name")
     Account findAccountByUserName(@Param("user_name") String user);
     @Query(nativeQuery = true,value = "SELECT * FROM Account WHERE id=:id")
