@@ -53,10 +53,6 @@ public class Account implements Serializable {
     @OneToOne
     private Img img;
 
-    @ManyToOne
-    @JoinColumn(name = "chat_room_id")
-    private ChatRoom chatRoom;
-
     public Account() {
     }
 

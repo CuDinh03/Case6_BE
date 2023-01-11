@@ -3,9 +3,9 @@ package com.example.casestudy6.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.Set;
 
-@Data
-@Entity
+
 public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

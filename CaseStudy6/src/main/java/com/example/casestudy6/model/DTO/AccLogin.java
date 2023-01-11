@@ -10,6 +10,7 @@ public class AccLogin {
     private String email;
     private String password;
 
+
     public String getUserName() {
         return userName;
     }
