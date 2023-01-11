@@ -50,7 +50,7 @@ public class RegisterController {
         Account appUserByName = accountService.findByUserName(signUpForm.getUserName());
         boolean checkUserName = appUserByName == null;
         boolean checkMail = appUserByEmail == null;
-        if (checkUserName && checkMail) {
+        if (checkUserName  && checkMail ) {
             Account account1 = new Account();
 //         Creating user's account
             account1.setUserName(signUpForm.getUserName());
@@ -71,7 +71,8 @@ public class RegisterController {
             result.add(true);
             result.add(true);
         } else {
-            result.add(checkUserName);
+
+            result.add(checkUserName  );
             result.add(checkMail);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);

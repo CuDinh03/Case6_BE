@@ -51,7 +51,7 @@ public class LoginController {
         String jwt = jwtService.createToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByUserName(account.getUserName());
-        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getAddress(), currentUser.getGender(),currentUser.getBirthDay() ,userDetails.getAuthorities()));
     }
 }
 
