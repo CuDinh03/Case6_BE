@@ -12,14 +12,7 @@ public class Friends {
     private Long account1;
     @ManyToOne
     private Account account2;
-    private String status;
+    private int status;
 
-    public Friends() {
-    }
 
-    public Friends(Long account1, Account account2, String status) {
-        this.account1 = account1;
-        this.account2 = account2;
-        this.status = status;
-    }
 }
