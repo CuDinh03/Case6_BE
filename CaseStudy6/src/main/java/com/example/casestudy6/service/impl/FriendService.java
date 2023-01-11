@@ -25,9 +25,13 @@ public class FriendService implements IFriendService {
     public List<FriendList> getAll(String account1) {
 
         listFriend = new ArrayList<FriendList>();
+
+
         List<Friends> list = iFriendRepo.getAllFriends(account1);
+
         for (int i = 0; i < list.size(); i++) {
             FriendList friendList = new FriendList();
+            friendList.setStatus(list.get(i).getAccount2().getStatus());
             friendList.setId(list.get(i).getAccount2().getId());
             friendList.setFirstName(list.get(i).getAccount2().getFirstName());
             friendList.setAddress(list.get(i).getAccount2().getAddress());
@@ -42,13 +46,76 @@ public class FriendService implements IFriendService {
     }
 
     @Override
-    public void addFriend(Friends friend) {
-
+    public void addFriend(long account1, long account2_id) {
+        Friends friend = new Friends();
+        friend.setAccount1(account1);
+        friend.setStatus(1);
+        Account account2 = iFriendRepof.getFriendToBlock(account2_id);
+        friend.setAccount2(account2);
+        iFriendRepo.save(friend);
     }
 
     @Override
-    public void removeFriend(Friends friend) {
+    public void acceptRequest(long account1, long account2_id) {
+        iFriendRepo.updateStatus(account2_id,account1);
+        Friends friend = new Friends();
+        friend.setAccount1(account1);
+        friend.setStatus(2);
+        Account account2 = iFriendRepof.getFriendToBlock(account2_id);
+        friend.setAccount2(account2);
+        iFriendRepo.save(friend);
+    }
 
+    @Override
+    public List<FriendList> listRequestSent(long account1) {
+        listFriend = new ArrayList<FriendList>();
+        List<Friends> list = iFriendRepo.listRequestSent(account1);
+        for (int i = 0; i < list.size(); i++) {
+            FriendList friendList = new FriendList();
+            friendList.setStatus(list.get(i).getAccount2().getStatus());
+            friendList.setId(list.get(i).getAccount2().getId());
+            friendList.setFirstName(list.get(i).getAccount2().getFirstName());
+            friendList.setAddress(list.get(i).getAccount2().getAddress());
+            friendList.setImg(list.get(i).getAccount2().getImg().getName());
+            friendList.setLastName(list.get(i).getAccount2().getLastName());
+            friendList.setGender(list.get(i).getAccount2().getGender());
+            friendList.setBirthDay(list.get(i).getAccount2().getBirthDay());
+            friendList.setPhoneNumber(list.get(i).getAccount2().getPhoneNumber());
+            listFriend.add(friendList);
+
+        }
+        return  listFriend;
+    }
+
+    @Override
+    public List<FriendList> listRequestReceived(long account2_id) {
+        listFriend = new ArrayList<FriendList>();
+        List<Friends> list = iFriendRepo.listRequestReceived(account2_id);
+        for (int i = 0; i < list.size(); i++) {
+            FriendList friendList = new FriendList();
+
+            long id1 =list.get(i).getAccount1();
+            friendList.setStatus(iFriendRepof.findAccountById(id1).getStatus());
+            friendList.setId(iFriendRepof.findAccountById(id1).getId());
+            friendList.setFirstName(iFriendRepof.findAccountById(id1).getFirstName());
+            friendList.setAddress(iFriendRepof.findAccountById(id1).getAddress());
+            friendList.setImg(iFriendRepof.findAccountById(id1).getImg().getName());
+            friendList.setLastName(iFriendRepof.findAccountById(id1).getLastName());
+            friendList.setGender(iFriendRepof.findAccountById(id1).getGender());
+            friendList.setBirthDay(iFriendRepof.findAccountById(id1).getBirthDay());
+            friendList.setPhoneNumber(iFriendRepof.findAccountById(id1).getPhoneNumber());
+
+
+            listFriend.add(friendList);
+
+        }
+        return  listFriend;
+    }
+
+    @Override
+    public void removeFriend(long account1, long account2_id) {
+     iFriendRepo.deleteRelationship(account1,account2_id);
+     iFriendRepo.deleteRelationship(account2_id,account1);
     }
 
     @Override
@@ -85,6 +152,9 @@ public class FriendService implements IFriendService {
             for (int j = 0; j < list2.size(); j++) {
                 if (list1.get(i).getAccount2().getId()==list2.get(j).getAccount2().getId()){
                     FriendList friendList = new FriendList();
+
+                    friendList.setStatus(list1.get(i).getAccount2().getStatus());
+                    friendList.setUsername(list1.get(i).getAccount2().getUserName());
                     friendList.setId(list1.get(i).getAccount2().getId());
                     friendList.setFirstName(list1.get(i).getAccount2().getFirstName());
                     friendList.setAddress(list1.get(i).getAccount2().getAddress());
@@ -105,7 +175,8 @@ public class FriendService implements IFriendService {
     @Override
     public FriendList getAccountByUserName(String name) {
         FriendList friendList = new FriendList();
-
+        friendList.setStatus(iFriendRepof.findAccountByUserName(name).getStatus());
+        friendList.setUsername(iFriendRepof.findAccountByUserName(name).getUserName());
         friendList.setId(iFriendRepof.findAccountByUserName(name).getId());
         friendList.setFirstName(iFriendRepof.findAccountByUserName(name).getFirstName());
         friendList.setLastName(iFriendRepof.findAccountByUserName(name).getLastName());
@@ -116,5 +187,61 @@ public class FriendService implements IFriendService {
         friendList.setImg(iFriendRepof.findAccountByUserName(name).getImg().getName());
 
         return friendList;
+    }
+
+    @Override
+    public FriendList getAccountById(long id) {
+        FriendList friendList = new FriendList();
+        friendList.setStatus(iFriendRepof.findAccountById(id).getStatus());
+        friendList.setId(iFriendRepof.findAccountById(id).getId());
+        friendList.setFirstName(iFriendRepof.findAccountById(id).getFirstName());
+        friendList.setLastName(iFriendRepof.findAccountById(id).getLastName());
+        friendList.setAddress(iFriendRepof.findAccountById(id).getAddress());
+        friendList.setPhoneNumber(iFriendRepof.findAccountById(id).getPhoneNumber());
+        friendList.setBirthDay(iFriendRepof.findAccountById(id).getBirthDay());
+        friendList.setGender(iFriendRepof.findAccountById(id).getGender());
+        friendList.setImg(iFriendRepof.findAccountById(id).getImg().getName());
+        friendList.setUsername(iFriendRepof.findAccountById(id).getUserName());
+
+        return friendList;
+    }
+
+    @Override
+    public List<FriendList> getAccountByAnyT(String any) {
+        listFriend = new ArrayList<FriendList>();
+        List<Account> list = iFriendRepof.findByAny(any);
+        for (int i = 0; i < list.size(); i++) {
+            FriendList friendList = new FriendList();
+            friendList.setStatus(list.get(i).getStatus());
+            friendList.setId(list.get(i).getId());
+            friendList.setFirstName(list.get(i).getFirstName());
+            friendList.setLastName(list.get(i).getLastName());
+            friendList.setAddress(list.get(i).getAddress());
+            friendList.setPhoneNumber(list.get(i).getPhoneNumber());
+            friendList.setBirthDay(list.get(i).getBirthDay());
+            friendList.setGender(list.get(i).getGender());
+            friendList.setImg(list.get(i).getImg().getName());
+            friendList.setUsername(list.get(i).getUserName());
+            listFriend.add(friendList);
+
+        }
+        return listFriend;
+    }
+
+    @Override
+    public int isFriends(long account1, long account2_id) {
+        List<Friends> friendList = iFriendRepo.isFriends(account1, account2_id);
+      if(friendList.size()==0){
+          return 0;
+      }else{
+          if (friendList.get(0).getStatus()==1)
+          {return 1;}
+          else return 2;
+      }
+    }
+
+    @Override
+    public void deleteRequest(long account1, long account2_id) {
+        iFriendRepo.deleteRequest(account1, account2_id);
     }
 }

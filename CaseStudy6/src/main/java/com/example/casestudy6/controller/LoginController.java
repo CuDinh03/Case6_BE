@@ -1,6 +1,7 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
+import com.example.casestudy6.model.dto.AccLogin;
 import com.example.casestudy6.model.dto.JwtResponse;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.JwtService;
@@ -13,6 +14,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -49,7 +51,7 @@ public class LoginController {
         String jwt = jwtService.createToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByUserName(account.getUserName());
-        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(), currentUser.getImg(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getGender(),currentUser.getAddress(), currentUser.getBirthDay(), userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getAddress(), currentUser.getGender(),currentUser.getBirthDay() ,userDetails.getAuthorities()));
     }
 }
 
