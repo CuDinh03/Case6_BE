@@ -54,13 +54,13 @@ public class StatusController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ArrayList<?>> findAllByAccountId(@PathVariable("id") Long id) {
-        Optional<Status> status = statusService.findById(id);
-        if (!status.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+//        Optional<Status> status = statusService.findById(id);
+//        if (!status.isPresent()) {
+//            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+//        }
         ArrayList<Iterable> result = new ArrayList<>();
         Iterable<Status> statuses = statusService.findAllByAccountId(id);;
-        ArrayList<Integer> listNumberOfLike = new ArrayList<>();
+//        ArrayList<Integer> listNumberOfLike = new ArrayList<>();
         result.add(statuses);
 //        Iterable<Img> images = imageService.findAllByStatus(status.get().getId());
 //        result.add(images);
