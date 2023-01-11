@@ -18,5 +18,6 @@ public interface IFriendService {
     FriendList getAccountById(long id);
     List<FriendList> getAccountByAnyT(String any);
     int isFriends(long account1, long account2_id);
+    void deleteRequest(long account1, long account2_id);
 
 }

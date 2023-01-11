@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+
 @RestController
 @CrossOrigin("*")
 @RequestMapping()
@@ -63,5 +65,19 @@ public class FriendController {
     @GetMapping("/isFriends/{id1}/{id2}")
     public ResponseEntity<Integer> isFriends(@PathVariable long id1,@PathVariable long id2){
         return new ResponseEntity<>(iFriendService.isFriends(id1,id2),HttpStatus.OK);
+    }
+    @DeleteMapping("/deleteRequest/{id1}/{id2}")
+    public ResponseEntity<?> removeRequest(@PathVariable long id1,@PathVariable long id2) {
+        iFriendService.deleteRequest(id1,id2);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("/sent/{id1}")
+    public ResponseEntity<List<FriendList>> getSent(@PathVariable long id1){
+
+        return new ResponseEntity<>(iFriendService.listRequestSent(id1),HttpStatus.OK);
+    }
+    @GetMapping("/received/{id1}")
+    public ResponseEntity<List<FriendList>> getReceived(@PathVariable long id1){
+        return new ResponseEntity<>(iFriendService.listRequestReceived(id1),HttpStatus.OK);
     }
 }
