@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,6 +24,11 @@ public class AccountController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @GetMapping("/allAccounts")
+    public ResponseEntity<Iterable<Account>> getAllAccounts() {
+        Iterable<Account> result = accountService.findAll();
+        return new ResponseEntity<>(result, HttpStatus.OK);
+    }
 
     @PutMapping("/change-password")
     public ResponseEntity<Account> changePassword(@RequestBody ChangePassword changePassword) {
