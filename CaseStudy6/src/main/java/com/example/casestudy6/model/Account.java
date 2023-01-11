@@ -5,7 +5,6 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.io.Serializable;
 import java.util.Date;
@@ -38,7 +37,7 @@ public class Account implements Serializable {
     @NotBlank(message = "email không để trống")
     private String email;
 
-    private String fistName;
+    private String firstName;
     private String lastName;
 
     @Column(nullable = false)
