@@ -16,6 +16,8 @@ public interface IFriendService {
     List<FriendList> getMutualFriend(long account1, long account2_id);
     FriendList getAccountByUserName(String name);
     FriendList getAccountById(long id);
-    List<FriendList> getAccountByAny(String any);
+    List<FriendList> getAccountByAnyT(String any);
+    int isFriends(long account1, long account2_id);
+    void deleteRequest(long account1, long account2_id);
 
 }

@@ -33,8 +33,8 @@ public interface IFriendRepo extends PagingAndSortingRepository<Friends,Long> {
     @Query(nativeQuery=true,value = "SELECT * FROM friends WHERE account1= :account2_id AND status=2")
     List<Friends> getAllFriendsOfAccount2(@Param("account2_id") long account2_id);
 
-@Transactional
-@Modifying
+    @Transactional
+    @Modifying
     @Query(nativeQuery=true,value = "INSERT INTO friends (account1, status,account2_id) VALUES (:id1, 1, :id2)")
     void sendRequest(@Param("id1") long id1, @Param("id2") long id2);
     @Transactional
@@ -45,4 +45,12 @@ public interface IFriendRepo extends PagingAndSortingRepository<Friends,Long> {
     List<Friends> listRequestSent(@Param("account1") long account1);
     @Query(nativeQuery = true,value = "SELECT * FROM friends WHERE account2_id =:account2_id AND status = 1")
     List<Friends> listRequestReceived(@Param("account2_id") long account2);
+    @Query(nativeQuery = true,value = "SELECT * FROM friends WHERE account1= :account1 and account2_id =:account2_id ")
+    List<Friends> isFriends(@Param("account1") long account1, @Param ("account2_id") long account2);
+    @Transactional
+    @Modifying
+    @Query(nativeQuery = true,value ="DELETE FROM friends WHERE account1= :account2_id and account2_id= :account1 and status =1")
+    void deleteRequest(@Param("account2_id") long account2_id,@Param("account1") long account1);
+
+
 }
