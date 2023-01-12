@@ -17,6 +17,6 @@ public interface IAccountRepoF extends PagingAndSortingRepository<Account,Long> 
     Account findAccountById(@Param("id") long id);
 
 
-    @Query(nativeQuery = true,value = "SELECT * FROM account where first_name LIKE  CONCAT('%',:anyT,'%')  OR last_name LIKE CONCAT('%',:anyT,'%') OR phone_number LIKE CONCAT('%',:anyT,'%')")
+    @Query(nativeQuery = true,value = "SELECT * FROM account where first_name LIKE  CONCAT('%',:anyT,'%')  OR last_name LIKE CONCAT('%',:anyT,'%') OR phone_number LIKE CONCAT('%',:anyT,'%') OR address LIKE CONCAT('%',:anyT,'%') OR user_name LIKE CONCAT('%',:anyT,'%') OR email LIKE CONCAT('%',:anyT,'%') ")
     List<Account> findByAny(@Param("anyT") String anyT);
 }

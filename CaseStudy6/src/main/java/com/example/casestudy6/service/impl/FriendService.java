@@ -71,10 +71,12 @@ public class FriendService implements IFriendService {
         listFriend = new ArrayList<FriendList>();
         List<Friends> list = iFriendRepo.listRequestSent(account1);
         for (int i = 0; i < list.size(); i++) {
+
             FriendList friendList = new FriendList();
+            friendList.setUsername(list.get(i).getAccount2().getUserName());
             friendList.setStatus(list.get(i).getAccount2().getStatus());
-            friendList.setId(list.get(i).getAccount2().getId());
             friendList.setFirstName(list.get(i).getAccount2().getFirstName());
+            friendList.setId(list.get(i).getAccount2().getId());
             friendList.setAddress(list.get(i).getAccount2().getAddress());
             friendList.setImg(list.get(i).getAccount2().getImg().getName());
             friendList.setLastName(list.get(i).getAccount2().getLastName());
@@ -95,6 +97,7 @@ public class FriendService implements IFriendService {
             FriendList friendList = new FriendList();
 
             long id1 =list.get(i).getAccount1();
+            friendList.setUsername(iFriendRepof.findAccountById(id1).getUserName());
             friendList.setStatus(iFriendRepof.findAccountById(id1).getStatus());
             friendList.setId(iFriendRepof.findAccountById(id1).getId());
             friendList.setFirstName(iFriendRepof.findAccountById(id1).getFirstName());
