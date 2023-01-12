@@ -28,7 +28,6 @@ public class RegisterController {
     private PasswordEncoder passwordEncoder;
 
 
-
     @GetMapping("/users/{id}")
     public ResponseEntity<Account> getProfile(@PathVariable Long id) {
         Optional<Account> userOptional = this.accountService.findById(id);
@@ -49,7 +48,7 @@ public class RegisterController {
         Account appUserByName = accountService.findByUserName(signUpForm.getUserName());
         boolean checkUserName = appUserByName == null;
         boolean checkMail = appUserByEmail == null;
-        if (checkUserName && checkMail) {
+        if (checkUserName  && checkMail ) {
             Account account1 = new Account();
 //         Creating user's account
             account1.setUserName(signUpForm.getUserName());
@@ -61,7 +60,6 @@ public class RegisterController {
             account1.setGender(signUpForm.getGender());
             account1.setFirstName(signUpForm.getFistName());
             account1.setLastName(signUpForm.getLastName());
-
             Set<Role> roles = new HashSet<>();
             Role role = new Role();
             role.setId(2);
@@ -71,7 +69,8 @@ public class RegisterController {
             result.add(true);
             result.add(true);
         } else {
-            result.add(checkUserName);
+
+            result.add(checkUserName  );
             result.add(checkMail);
         }
         return new ResponseEntity<>(result, HttpStatus.OK);
