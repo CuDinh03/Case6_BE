@@ -48,10 +48,10 @@ public class LoginController {
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String jwt = jwtService.createToken(authentication);
+        String token = jwtService.createToken(authentication);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         Account currentUser = accountService.findByUserName(account.getUserName());
-        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getAddress(), currentUser.getGender(),currentUser.getBirthDay() ,userDetails.getAuthorities()));
+        return ResponseEntity.ok(new JwtResponse(token, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getAddress(), currentUser.getGender(),currentUser.getBirthDay() ,userDetails.getAuthorities()));
     }
 }
 
