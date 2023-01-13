@@ -5,6 +5,7 @@ import com.example.casestudy6.model.Status;
 import com.example.casestudy6.service.impl.ImageService;
 import com.example.casestudy6.service.impl.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,41 +25,25 @@ public class StatusController {
     ImageService imageService;
 
     @GetMapping
-    public ResponseEntity<ArrayList<?>> findALL() {
+    public ResponseEntity<ArrayList<?>> findALL(@RequestParam("userId") Long userId) {
         ArrayList<Iterable> result = new ArrayList<>();
-//        ArrayList<Status> statusOwner = (ArrayList<Status>) statusService.findAllByOwner(currentId);
-//        ArrayList<Status> statusFriend = (ArrayList<Status>) statusService.findAllByOwnerFriend(currentId);
-//        ArrayList<Status> statusStranger = (ArrayList<Status>) statusService.findAllByStranger(currentId);
-        Iterable<Status> listStatus = statusService.findAll();
-//        listStatus.addAll(statusOwner);
-//        listStatus.addAll(statusFriend);
-//        listStatus.addAll(statusStranger);
+        ArrayList<Status> publicStatus = (ArrayList<Status>) statusService.findAllPublicStatus();
+        ArrayList<Status> friendStatus = (ArrayList<Status>) statusService.findAllFriendStatus(userId);
+        ArrayList<Status> listStatus = new ArrayList<>();
+        listStatus.addAll(publicStatus);
+        listStatus.addAll(friendStatus);
         result.add(listStatus);
-        ArrayList<Iterable<Img>> listImage = new ArrayList<>();
-//        ArrayList<Integer> listNumberOfLike = new ArrayList<>();
-//        ArrayList<Integer> listNumberOfComment = new ArrayList<>();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        for (Status status : listStatus) {
-            Iterable<Img> images = imageService.findAllByStatusId(status.getId());
-            listImage.add(images);
-//            Integer numberOfLike = likeStatusService.findNumberOfLikeByStatus(status.getId());
-//            if (numberOfLike == null) {
-//                numberOfLike = 0;
-//            }
-//            listNumberOfLike.add(numberOfLike);
-//            Integer numberOfComment = commentService.findNumberOfComment(status.getId());
-//            if (numberOfComment == null) {
-//                numberOfComment = 0;
-//            }
-//            listNumberOfComment.add(numberOfComment);
-        }
-        result.add(listImage);
-//        result.add(listNumberOfLike);
-//        result.add(listNumberOfComment);
+//        ArrayList<Iterable<Img>> listImage = new ArrayList<>();
+//        try {
+//            Thread.sleep(1000);
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        }
+//        for (Status status : listStatus) {
+//            Iterable<Img> images = imageService.findAllByStatusId(status.getId());
+//            listImage.add(images);
+//            result.add(listImage);
+//        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

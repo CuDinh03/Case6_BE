@@ -14,8 +14,13 @@ public class StatusService implements IStatusService<Status> {
     StatusRepo statusRepo;
 
     @Override
-    public Iterable<Status> findAll() {
-        return statusRepo.findAll();
+    public Iterable<Status> findAllPublicStatus() {
+        return statusRepo.findAllPublicStatus();
+    }
+
+    @Override
+    public Iterable<Status> findAllFriendStatus(Long id) {
+        return statusRepo.findAllFriendStatus(id);
     }
 
     @Override

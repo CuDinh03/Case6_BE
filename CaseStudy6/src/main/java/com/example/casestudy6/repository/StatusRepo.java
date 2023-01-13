@@ -12,8 +12,11 @@ import java.util.Optional;
 @Repository
 public interface StatusRepo extends JpaRepository<Status, Long> {
 
-    @Query(value = "select * from status where (status = 1 or status = 2) order by post_day desc ", nativeQuery = true)
-    List<Status> findAll();
+    @Query(value = "select * from status where status = 1 order by post_day desc ", nativeQuery = true)
+    Iterable<Status> findAllPublicStatus();
+
+    @Query(value = "select * from status inner join friends on (friends.account1 = :userId and status.status = 2 and friends.status = 2) order by status.post_day desc",nativeQuery = true)
+    Iterable<Status> findAllFriendStatus(@Param("userId") Long userId);
 
     @Query(value = "select * from status where account_id = :id and (status <> 4)  order by post_day desc", nativeQuery = true)
     Iterable<Status> findByAccountId(@Param("id") Long id);
