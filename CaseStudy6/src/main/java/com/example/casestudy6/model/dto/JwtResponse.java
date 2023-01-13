@@ -37,6 +37,10 @@ public class JwtResponse {
         this.roles = roles;
     }
 
+    public JwtResponse() {
+
+    }
+
     public Long getId() {
         return id;
     }
