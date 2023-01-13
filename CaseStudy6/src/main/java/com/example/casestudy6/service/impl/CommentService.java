@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class CommentService implements ICommentService<Comment> {
     @Autowired
-     CommentRepo commentRepo;
+    CommentRepo commentRepo;
     @Override
     public Iterable<Comment> findAll() {
         return commentRepo.findAll();
