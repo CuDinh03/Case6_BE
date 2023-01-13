@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Repository
 public interface IImgRepo extends JpaRepository<Img, Long> {
     @Modifying
@@ -18,6 +20,6 @@ public interface IImgRepo extends JpaRepository<Img, Long> {
     @Query(nativeQuery = true,value = "SELECT * FROM img WHERE name= :name")
     Img findByName(@Param("name") String name);
 
-    @Query(nativeQuery = true,value = "select * from (SELECT * from status_img where status_img.status_id = :status_id) as statusimg inner join img on img.id = statusimg.img_id;")
+    @Query(nativeQuery = true,value = "select img.id, img.name from (SELECT * from status_img where status_img.status_id = :status_id) as statusimg inner join img on img.id = statusimg.img_id")
     Iterable<Img> findAllByStatusId(@Param("status_id") Long id);
 }
