@@ -6,6 +6,8 @@ import com.example.casestudy6.service.ICommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class CommentService implements ICommentService<Comment> {
     @Autowired
@@ -29,4 +31,10 @@ public class CommentService implements ICommentService<Comment> {
     public Integer numberOfComment() {
         return commentRepo.numberOfComment();
     }
+
+    @Override
+    public Optional<Comment> findById(Long id) {
+        return commentRepo.findById(id);
+    }
+
 }

@@ -12,4 +12,6 @@ public interface ICommentService<C> {
     void remove(Long id);
 
     Integer numberOfComment();
+
+    Optional<Comment> findById(Long id);
 }
