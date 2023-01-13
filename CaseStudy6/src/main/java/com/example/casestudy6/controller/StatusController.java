@@ -37,6 +37,11 @@ public class StatusController {
         ArrayList<Iterable<Img>> listImage = new ArrayList<>();
 //        ArrayList<Integer> listNumberOfLike = new ArrayList<>();
 //        ArrayList<Integer> listNumberOfComment = new ArrayList<>();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         for (Status status : listStatus) {
             Iterable<Img> images = imageService.findAllByStatusId(status.getId());
             listImage.add(images);
