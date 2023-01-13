@@ -1,7 +1,6 @@
 package com.example.casestudy6.service;
 
 import com.example.casestudy6.model.Account;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.Optional;
@@ -16,7 +15,7 @@ public interface IAccountService extends UserDetailsService {
 
     Optional<Account> findById(Long id);
 
-    boolean checkLogin(Account account);
+    long checkLogin(Account account);
 
     boolean isRegister(Account account);
 
