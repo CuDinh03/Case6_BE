@@ -1,6 +1,8 @@
 package com.example.casestudy6.controller;
 
+import com.example.casestudy6.model.Img;
 import com.example.casestudy6.model.Status;
+import com.example.casestudy6.service.impl.ImageService;
 import com.example.casestudy6.service.impl.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +20,9 @@ public class StatusController {
     @Autowired
     StatusService statusService;
 
+    @Autowired
+    ImageService imageService;
+
     @GetMapping
     public ResponseEntity<ArrayList<?>> findALL() {
         ArrayList<Iterable> result = new ArrayList<>();
@@ -29,12 +34,12 @@ public class StatusController {
 //        listStatus.addAll(statusFriend);
 //        listStatus.addAll(statusStranger);
         result.add(listStatus);
-//        ArrayList<Iterable<Image>> listImage = new ArrayList<>();
+        ArrayList<Iterable<Img>> listImage = new ArrayList<>();
 //        ArrayList<Integer> listNumberOfLike = new ArrayList<>();
 //        ArrayList<Integer> listNumberOfComment = new ArrayList<>();
-//        for (Status status : listStatus) {
-//            Iterable<Image> images = imageService.findAllByStatus(status.getId());
-//            listImage.add(images);
+        for (Status status : listStatus) {
+            Iterable<Img> images = imageService.findAllByStatusId(status.getId());
+            listImage.add(images);
 //            Integer numberOfLike = likeStatusService.findNumberOfLikeByStatus(status.getId());
 //            if (numberOfLike == null) {
 //                numberOfLike = 0;
@@ -45,8 +50,8 @@ public class StatusController {
 //                numberOfComment = 0;
 //            }
 //            listNumberOfComment.add(numberOfComment);
-//        }
-//        result.add(listImage);
+        }
+        result.add(listImage);
 //        result.add(listNumberOfLike);
 //        result.add(listNumberOfComment);
         return new ResponseEntity<>(result, HttpStatus.OK);
