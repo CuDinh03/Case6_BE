@@ -1,6 +1,8 @@
 package com.example.casestudy6.repository;
 
+import com.example.casestudy6.model.Comment;
 import com.example.casestudy6.model.Img;
+import com.example.casestudy6.model.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,6 +22,10 @@ public interface IImgRepo extends JpaRepository<Img, Long> {
     @Query(nativeQuery = true,value = "SELECT * FROM img WHERE name= :name")
     Img findByName(@Param("name") String name);
 
-    @Query(nativeQuery = true,value = "select img.id, img.name, img.status from (SELECT * from status_img where status_img.status_id = :status_id) as statusimg inner join img on img.id = statusimg.img_id")
+    @Query(nativeQuery = true,value = "select img.id, img.name, img.status from (SELECT * from status_img where status_img.status_id = :status_id) as statusimg inner join img on img.id = statusimg.img_id and a.status = 1")
     Iterable<Img> findAllByStatusId(@Param("status_id") Long id);
+
+
+
+
 }
