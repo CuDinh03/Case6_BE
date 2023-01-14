@@ -63,8 +63,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll();
-        http.authorizeRequests().antMatchers( "/**", "/register", "/users/**").permitAll();
-        http.authorizeRequests().antMatchers("/main","/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**").access("hasRole('ROLE_USER')")
+        http.authorizeRequests().antMatchers( "/register", "/users/**","/**").permitAll();
+        http.authorizeRequests().antMatchers("/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**", "/main").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
 

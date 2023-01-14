@@ -5,7 +5,9 @@ import com.example.casestudy6.model.Status;
 import java.util.Optional;
 
 public interface IStatusService<T> {
-    Iterable<T> findAll();
+    Iterable<T> findAllPublicStatus();
+
+    Iterable<T> findAllFriendStatus(Long id);
 
     Optional<T> findById(Long id);
 
