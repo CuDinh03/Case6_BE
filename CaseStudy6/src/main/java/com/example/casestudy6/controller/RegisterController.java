@@ -37,12 +37,6 @@ public class RegisterController {
         return userOptional.map(user -> new ResponseEntity<>(user, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("/users")
-    public ResponseEntity<Iterable<Account>> showAllUser() {
-        Iterable<Account> accounts = accountService.findAll();
-        return new ResponseEntity<>(accounts, HttpStatus.OK);
-    }
-
     @PostMapping("/register")
     public ResponseEntity<List<Boolean>> register(@RequestBody SignUpForm signUpForm) {
         List<Boolean> result = new ArrayList<>();
