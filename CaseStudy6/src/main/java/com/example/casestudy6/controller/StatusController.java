@@ -34,11 +34,11 @@ public class StatusController {
         listStatus.addAll(friendStatus);
         result.add(listStatus);
 //        ArrayList<Iterable<Img>> listImage = new ArrayList<>();
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            throw new RuntimeException(e);
-//        }
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 //        for (Status status : listStatus) {
 //            Iterable<Img> images = imageService.findAllByStatusId(status.getId());
 //            listImage.add(images);
