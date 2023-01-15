@@ -1,7 +1,10 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
+import com.example.casestudy6.model.dto.AccountEdit;
 import com.example.casestudy6.model.dto.ChangePassword;
+import com.example.casestudy6.model.dto.FriendList;
+import com.example.casestudy6.service.IAccountService;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,8 @@ public class AccountController {
     RoleService roleService;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    IAccountService iAccountService;
 
 
     @PutMapping("/change-password")
@@ -44,5 +49,14 @@ public class AccountController {
         account.setPassword(newPassword);
         accountService.save(account);
         return new ResponseEntity<>(account, HttpStatus.OK);
+    }
+    @PutMapping("/update")
+    public ResponseEntity<?> update(@RequestBody AccountEdit account){
+        iAccountService.updateAccount(account);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+    @GetMapping("account/{account}")
+    public ResponseEntity<FriendList> findby_id(@PathVariable long account){
+        return new ResponseEntity<>(iAccountService.getAccountById(account),HttpStatus.OK);
     }
 }

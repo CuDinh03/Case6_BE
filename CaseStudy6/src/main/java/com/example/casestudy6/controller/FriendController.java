@@ -1,5 +1,6 @@
 package com.example.casestudy6.controller;
 
+import com.example.casestudy6.model.Account;
 import com.example.casestudy6.model.dto.FriendList;
 import com.example.casestudy6.service.IFriendService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -75,4 +76,5 @@ public class FriendController {
     public ResponseEntity<List<FriendList>> getReceived(@PathVariable long id1){
         return new ResponseEntity<>(iFriendService.listRequestReceived(id1),HttpStatus.OK);
     }
+
 }
