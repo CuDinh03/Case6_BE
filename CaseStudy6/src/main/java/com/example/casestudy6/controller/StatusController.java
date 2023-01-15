@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -109,4 +110,12 @@ public class StatusController {
         }
         return new ResponseEntity(status, HttpStatus.OK);
     }
+
+    @GetMapping("/search/{id}/{any}")
+    public ResponseEntity<ArrayList<?>> findStatusOfme(@PathVariable("id") Long id, @PathVariable("any") String any){
+        ArrayList<Status> statusList = (ArrayList<Status>) statusService.findAllStatusOfMe(id, any);
+
+        return new ResponseEntity<>(statusList, HttpStatus.OK);
+    }
+
 }

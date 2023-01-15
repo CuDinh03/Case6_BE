@@ -26,4 +26,8 @@ public interface StatusRepo extends JpaRepository<Status, Long> {
 
     @Query(value = "select * from status where id = :id", nativeQuery = true)
     Optional<Status> findById(@Param("id") Long id);
+
+    @Query(value = "select * from status where status.account_id = :id and content like ('%' + any +'%') order by post_day desc", nativeQuery = true)
+    List<Status> findByContent (@Param("any")  String any, @Param("id") Long id);
+
 }
