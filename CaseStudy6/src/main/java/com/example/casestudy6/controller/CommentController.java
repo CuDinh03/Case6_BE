@@ -1,11 +1,8 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Comment;
-import com.example.casestudy6.model.Img;
-import com.example.casestudy6.model.Status;
-import com.example.casestudy6.repository.ICommentRepo;
 import com.example.casestudy6.service.ICommentService;
-import org.aspectj.apache.bcel.Repository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
