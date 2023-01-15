@@ -17,8 +17,8 @@ public interface ICommentRepo extends JpaRepository<Comment, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM comment WHERE commnent_id= :comment_id")
     Comment findCommentById(@Param("comment_id") Long id);
 
-    @Query(value = "select * from comment order by id ", nativeQuery = true)
-    Comment findLastComments();
+    @Query(value = "select * from comment order by post_day desc ", nativeQuery = true)
+    Iterable<Comment> findComments();
 
     @Query(nativeQuery = true, value = "select a.text, b.last_name, b.first_name,  a.post_day, b.img_id from (comment a inner join account b on a.account_id = b.id ) inner join status on b.id = status.account_id where status.id = :status_id order by  a.post_day desc")
     Iterable<Comment> findAllByStatusId(@Param("status_id") Long id);

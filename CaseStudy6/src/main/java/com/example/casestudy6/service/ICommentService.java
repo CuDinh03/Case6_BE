@@ -10,10 +10,8 @@ public interface ICommentService<T> {
 
     void save(Comment comments);
 
-    void saveToStatus(ArrayList<T> t);
-
     Iterable<T> findAllByStatusId(Long id);
 
-    T findLastComment();
+    Iterable<T> findLastComment();
 
 }
