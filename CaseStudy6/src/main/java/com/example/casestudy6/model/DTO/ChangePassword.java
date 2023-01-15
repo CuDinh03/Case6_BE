@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Component
+
 public class ChangePassword {
         private String oldPassword;
         private String newPassword;
