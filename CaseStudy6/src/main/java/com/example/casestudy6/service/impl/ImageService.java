@@ -21,7 +21,7 @@ public class ImageService implements IImageService<Img> {
     Img img1 = new Img();
 
     @Override
-    public void save(ArrayList<Img> img) {
+    public void saveAll(ArrayList<Img> img) {
         Status status = statusService.findLastStatus();
         for (int i = 0; i < img.size(); i++) {
             imgRepo.save(img.get(i));
@@ -33,6 +33,11 @@ public class ImageService implements IImageService<Img> {
     @Override
     public Iterable<Img> findAllByStatusId(Long id) {
         return imgRepo.findAllByStatusId(id);
+    }
+
+    @Override
+    public Optional<Img> findById(Long id) {
+        return imgRepo.findById(id);
     }
 
 

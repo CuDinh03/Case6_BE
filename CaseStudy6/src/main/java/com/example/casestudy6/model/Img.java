@@ -21,4 +21,8 @@ public class Img {
         this.name = name;
         this.status = status;
     }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
 }
