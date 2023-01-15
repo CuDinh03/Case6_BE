@@ -3,6 +3,7 @@ package com.example.casestudy6.controller;
 import com.example.casestudy6.model.Comment;
 import com.example.casestudy6.model.Img;
 import com.example.casestudy6.model.Status;
+import com.example.casestudy6.repository.ICommentRepo;
 import com.example.casestudy6.service.ICommentService;
 import org.aspectj.apache.bcel.Repository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,11 @@ public class CommentController {
     @Autowired
     ICommentService iCommentService;
 
-    @PostMapping
-    public ResponseEntity<Comment> saveComment(@RequestBody Comment comments) {
+
+    @PostMapping("/{id}")
+    public ResponseEntity<Comment> saveComment(@RequestBody Comment comments, @PathVariable("id") Long id) {
         comments.setPostDay(LocalDateTime.now());
-        iCommentService.save(comments);
+        iCommentService.save(comments, id);
         return new ResponseEntity(iCommentService.findLastComment(),HttpStatus.CREATED);
     }
 

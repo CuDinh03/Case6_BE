@@ -8,10 +8,12 @@ import java.util.List;
 
 public interface ICommentService<T> {
 
-    void save(Comment comments);
+    void save(Comment comments, Long id);
 
     Iterable<T> findAllByStatusId(Long id);
 
-    Iterable<T> findLastComment();
+    Iterable<T> findComments();
 
+
+    T findLastComment();
 }
