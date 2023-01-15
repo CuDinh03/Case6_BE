@@ -18,7 +18,7 @@ public interface IStatusService<T> {
 
     T findLastStatus();
 
-    List<T> findAllStatusOfMe(Long id, String any);
+    Iterable<T> findAllStatusOfMe(Long id, String any);
 
 
     Iterable<T> findAllByAccountId(Long id);

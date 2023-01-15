@@ -113,9 +113,14 @@ public class StatusController {
 
     @GetMapping("/search/{id}/{any}")
     public ResponseEntity<ArrayList<?>> findStatusOfme(@PathVariable("id") Long id, @PathVariable("any") String any){
-        ArrayList<Status> statusList = (ArrayList<Status>) statusService.findAllStatusOfMe(id, any);
+        ArrayList<Iterable> result = new ArrayList<>();
+        ArrayList<Status> publicStatus = (ArrayList<Status>) statusService.findAllStatusOfMe(id,any);
+        ArrayList<Status> listStatus = new ArrayList<>();
+        listStatus.addAll(publicStatus);
 
-        return new ResponseEntity<>(statusList, HttpStatus.OK);
+        result.add(listStatus);
+
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 }

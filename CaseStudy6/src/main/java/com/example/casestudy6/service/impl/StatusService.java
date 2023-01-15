@@ -50,8 +50,8 @@ public class StatusService implements IStatusService<Status> {
     }
 
     @Override
-    public List<Status> findAllStatusOfMe(Long id, String any) {
-        return statusRepo.findByContent(any, id);
+    public Iterable<Status> findAllStatusOfMe(Long id, String any) {
+        return statusRepo.findByContent(id, any);
     }
 
     @Override
