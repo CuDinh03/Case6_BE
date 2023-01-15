@@ -22,7 +22,6 @@ public class AccountService implements IAccountService {
     @Autowired
     IAccountRepo iAccountRepo;
 
-
     @Override
     public void save(Account account) {
         iAccountRepo.save(account);

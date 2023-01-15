@@ -1,7 +1,8 @@
-package com.example.casestudy6.model.dto;
+package com.example.casestudy6.model.DTO;
 
 import com.example.casestudy6.model.Img;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Date;

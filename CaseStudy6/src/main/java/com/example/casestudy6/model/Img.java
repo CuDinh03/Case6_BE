@@ -11,12 +11,14 @@ public class Img {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+    private int status;
 
     public Img() {
     }
 
-    public Img(Long id, String name) {
+    public Img(Long id, String name, int status) {
         this.id = id;
         this.name = name;
+        this.status = status;
     }
 }

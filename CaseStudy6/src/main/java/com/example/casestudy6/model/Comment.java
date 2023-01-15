@@ -2,6 +2,7 @@ package com.example.casestudy6.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Data
@@ -12,6 +13,8 @@ public class Comment {
     private Long id;
     private int status;
     private String text;
+
+    private LocalDateTime postDay;
     @ManyToOne
     private Account account;
     @OneToMany
