@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -22,7 +23,7 @@ public class CommentController {
     @PostMapping("/{id}")
     public ResponseEntity<Comment> saveComment(@RequestBody Comment comments, @PathVariable("id") Long id) {
         comments.setPostDay(LocalDateTime.now());
-        iCommentService.save(comments, id);
+        iCommentService.saveComment(comments, id);
         return new ResponseEntity(iCommentService.findLastComment(),HttpStatus.CREATED);
     }
 
@@ -34,5 +35,15 @@ public class CommentController {
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
-
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Comment> deleteComment(@PathVariable Long id) {
+        Optional<Comment> comment1 = iCommentService.findById(id);
+        Comment comment = comment1.get();
+        if (!comment1.isPresent()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        comment.setStatus(2);
+        iCommentService.save(comment);
+        return new ResponseEntity<>(comment, HttpStatus.NO_CONTENT);
+    }
 }

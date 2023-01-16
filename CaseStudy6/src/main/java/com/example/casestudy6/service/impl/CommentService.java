@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class CommentService implements ICommentService<Comment> {
@@ -20,7 +21,12 @@ public class CommentService implements ICommentService<Comment> {
     StatusService statusService;
 
     @Override
-    public void save(Comment comments, Long id) {
+    public void save(Comment comment) {
+        iCommentRepo.save(comment);
+    }
+
+    @Override
+    public void saveComment(Comment comments, Long id) {
       iCommentRepo.save(comments);
       Comment comment = findLastComment();
       iCommentRepo.saveComment(id,comment.getId());
@@ -45,6 +51,11 @@ public class CommentService implements ICommentService<Comment> {
     @Override
     public Comment findLastComment() {
         return iCommentRepo.findLastComment();
+    }
+
+    @Override
+    public Optional<Comment> findById(Long id) {
+        return iCommentRepo.findById(id);
     }
 
 
