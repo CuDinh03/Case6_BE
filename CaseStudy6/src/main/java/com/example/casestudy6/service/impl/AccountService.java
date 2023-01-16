@@ -1,20 +1,20 @@
 package com.example.casestudy6.service.impl;
 
 import com.example.casestudy6.model.Account;
+import com.example.casestudy6.model.dto.*;
 import com.example.casestudy6.repository.IAccountRepo;
 import com.example.casestudy6.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.Optional;
 
 @Service
 public class AccountService implements IAccountService {
+    Account account1 = new Account();
     @Autowired
     IAccountRepo iAccountRepo;
 
@@ -70,6 +70,37 @@ public class AccountService implements IAccountService {
     }
 
     @Override
+    public void updateAccount(AccountEdit account) {
+        account1 = iAccountRepo.findById(account.getId()).get();
+        account1.setFirstName(account.getFirstName());
+        account1.setLastName(account.getLastName());
+        account1.setAddress(account.getAddress());
+        account1.setGender(account.getGender());
+        account1.setBirthDay(account.getBirthDay());
+        account1.setPhoneNumber(account.getPhoneNumber());
+        account1.setStatus(account.getStatus());
+        iAccountRepo.save(account1);
+    }
+
+    @Override
+    public FriendList getAccountById(Long id) {
+        FriendList friendList = new FriendList();
+        friendList.setStatus(iAccountRepo.findById(id).get().getStatus());
+        friendList.setGender(iAccountRepo.findById(id).get().getGender());
+        friendList.setAddress(iAccountRepo.findById(id).get().getAddress());
+        friendList.setBirthDay(iAccountRepo.findById(id).get().getBirthDay());
+        friendList.setFirstName(iAccountRepo.findById(id).get().getFirstName());
+        friendList.setLastName(iAccountRepo.findById(id).get().getLastName());
+        friendList.setPhoneNumber(iAccountRepo.findById(id).get().getPhoneNumber());
+        friendList.setImg(iAccountRepo.findById(id).get().getImg().getName());
+        friendList.setId(iAccountRepo.findById(id).get().getId());
+        friendList.setUsername(iAccountRepo.findById(id).get().getUserName());
+        return friendList ;
+    }
+
+
+
+    @Override
     public UserDetails loadUserByUsername(String userName) {
         Account account = iAccountRepo.findByUserName(userName);
         if (account == null) {
@@ -86,4 +117,5 @@ public class AccountService implements IAccountService {
                 account.getPassword(), enable, accountNonExpired, credentialsNonExpired,
                 accountNonLocked, null);
     }
+
 }
