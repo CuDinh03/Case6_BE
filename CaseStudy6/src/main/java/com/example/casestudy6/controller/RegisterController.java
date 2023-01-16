@@ -2,7 +2,7 @@ package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
 import com.example.casestudy6.model.Role;
-import com.example.casestudy6.model.dto.SignUpForm;
+import com.example.casestudy6.model.DTO.SignUpForm;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;

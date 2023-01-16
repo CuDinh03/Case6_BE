@@ -1,17 +1,12 @@
 package com.example.casestudy6.controller;
 
-
-import com.example.casestudy6.model.dto.FriendList;
+import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.service.IFriendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-
-
 @RestController
 @CrossOrigin("*")
 @RequestMapping()
@@ -80,4 +75,5 @@ public class FriendController {
     public ResponseEntity<List<FriendList>> getReceived(@PathVariable long id1){
         return new ResponseEntity<>(iFriendService.listRequestReceived(id1),HttpStatus.OK);
     }
+
 }

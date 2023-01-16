@@ -1,4 +1,4 @@
-package com.example.casestudy6.model.dto;
+package com.example.casestudy6.model.DTO;
 
 import org.springframework.stereotype.Component;
 
@@ -36,7 +36,7 @@ public class FriendList {
     public FriendList(Long id, String username, String firstName, String lastName, Date birthDay, String img, String gender, String address, String phoneNumber, int status) {
         this.id = id;
         this.username = username;
-        this.firstName = this.firstName;
+        this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
         this.img = img;

@@ -7,8 +7,6 @@ import javax.persistence.*;
 @Data
 @Entity
 public class Likes {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
