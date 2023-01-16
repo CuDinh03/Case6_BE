@@ -1,6 +1,9 @@
 package com.example.casestudy6.model.dto;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
+
 
 public class AccountEdit {
     private Long id;

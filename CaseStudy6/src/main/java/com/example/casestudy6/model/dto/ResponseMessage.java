@@ -1,5 +1,8 @@
 package com.example.casestudy6.model.dto;
 
+import org.springframework.stereotype.Component;
+
+
 public class ResponseMessage {
     private String message;
 

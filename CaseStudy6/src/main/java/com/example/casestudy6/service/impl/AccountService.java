@@ -1,19 +1,15 @@
 package com.example.casestudy6.service.impl;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.dto.AccountEdit;
-import com.example.casestudy6.model.dto.FriendList;
+import com.example.casestudy6.model.dto.*;
 import com.example.casestudy6.repository.IAccountRepo;
 import com.example.casestudy6.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Date;
 import java.util.Optional;
 
 @Service
