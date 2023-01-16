@@ -18,6 +18,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 @Configuration
 @EnableWebSecurity
@@ -63,8 +64,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/**");
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll();
-        http.authorizeRequests().antMatchers( "/register", "/users/**","/**").permitAll();
-        http.authorizeRequests().antMatchers("/comments", "/comments/**", "/images", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**", "/main").access("hasRole('ROLE_USER')")
+        http.headers()
+                .addHeaderWriter(
+                        new StaticHeadersWriter("Access-Control-Allow-Origin", "address for your front-end here")
+                );
+        http.authorizeRequests().antMatchers(  "/register", "/users/**","/**").permitAll();
+        http.authorizeRequests().antMatchers("/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**","/main").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().csrf().disable();
 

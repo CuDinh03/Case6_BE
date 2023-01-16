@@ -7,6 +7,7 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 
 public interface IAccountRepo extends PagingAndSortingRepository<Account, Long> {
     Account findByUserName(String userName);
+
     Account findByEmail(String email);
 
 }

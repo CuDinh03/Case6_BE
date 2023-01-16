@@ -1,7 +1,7 @@
 package com.example.casestudy6.service;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.dto.*;
+import com.example.casestudy6.model.DTO.*;
 
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -17,7 +17,7 @@ public interface IAccountService extends UserDetailsService {
 
     Optional<Account> findById(Long id);
 
-    boolean checkLogin(Account account);
+    long checkLogin(Account account);
 
     boolean isRegister(Account account);
     void updateAccount(AccountEdit account);

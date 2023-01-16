@@ -2,7 +2,6 @@ package com.example.casestudy6.model.DTO;
 
 import com.example.casestudy6.model.Img;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.Date;
@@ -36,6 +35,10 @@ public class JwtResponse {
         this.address = address;
         this.gender = gender;
         this.roles = roles;
+    }
+
+    public JwtResponse() {
+
     }
 
     public Long getId() {
@@ -133,4 +136,5 @@ public class JwtResponse {
     public void setRoles(Collection<? extends GrantedAuthority> roles) {
         this.roles = roles;
     }
+
 }

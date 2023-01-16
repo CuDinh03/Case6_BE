@@ -1,10 +1,12 @@
 package com.example.casestudy6.service.impl;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.dto.*;
+import com.example.casestudy6.model.DTO.*;
 import com.example.casestudy6.repository.IAccountRepo;
 import com.example.casestudy6.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,6 +20,10 @@ public class AccountService implements IAccountService {
     @Autowired
     IAccountRepo iAccountRepo;
 
+
+    public Page<Account> getAllPage(Pageable pageable){
+        return iAccountRepo.findAll(pageable);
+    }
     @Override
     public void save(Account account) {
         iAccountRepo.save(account);
@@ -44,16 +50,25 @@ public class AccountService implements IAccountService {
     }
 
     @Override
-    public boolean checkLogin(Account account) {
-        Iterable<Account> accounts = this.findAll();
-        boolean isCorrectUser = false;
-        for (Account currentUser : accounts) {
-            if (currentUser.getUserName().equals(account.getUserName())
-                    && account.getPassword().equals(currentUser.getPassword())) {
-                isCorrectUser = true;
-            }
+    public long checkLogin(Account account) {
+        long isCorrectUser;
+        Account account1 = findByUserName(account.getUserName());
+        if (account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 0) {
+            isCorrectUser = 1;
+        } else if (account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 1) {
+            isCorrectUser = 2;
+        }else {
+            isCorrectUser = 3;
         }
         return isCorrectUser;
+//        for (Account currentUser : accounts) {
+//            if (currentUser.getUserName().equals(account.getUserName())
+//                    && account.getPassword().equals(currentUser.getPassword()) && currentUser.getStatus()==0) {
+//                isCorrectUser = true;
+//            }
+//        }
+//        return isCorrectUser;
+//    }
     }
 
     @Override
@@ -106,7 +121,7 @@ public class AccountService implements IAccountService {
         if (account == null) {
             throw new UsernameNotFoundException(userName);
         }
-        if (this.checkLogin(account)) {
+        if (this.checkLogin(account) == 1) {
             return new User(account.getUserName(), account.getPassword(), account.getRoles());
         }
         boolean enable = false;
@@ -117,5 +132,4 @@ public class AccountService implements IAccountService {
                 account.getPassword(), enable, accountNonExpired, credentialsNonExpired,
                 accountNonLocked, null);
     }
-
 }

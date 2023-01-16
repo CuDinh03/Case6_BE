@@ -1,12 +1,10 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
-
 import com.example.casestudy6.model.DTO.JwtResponse;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.JwtService;
 import com.example.casestudy6.service.impl.RoleService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +18,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Validated
 @RestController
@@ -39,19 +40,46 @@ public class LoginController {
 
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Account account) {
-        if (!accountService.isRegister(account)) {
-            return new ResponseEntity<>("1", HttpStatus.NOT_FOUND);
+    public ResponseEntity<List<Object>> login(@RequestBody Account account) {
+        List<Object> result = new ArrayList<>();
+        JwtResponse jwtResponse;
+        if (accountService.checkLogin(account) == 1) {
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(account.getUserName(), account.getPassword()));
+
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+
+            String token = jwtService.createToken(authentication);
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            Account currentUser = accountService.findByUserName(account.getUserName());
+            jwtResponse = new JwtResponse();
+            jwtResponse.setToken(token);
+            jwtResponse.setId(currentUser.getId());
+            jwtResponse.setUserName(currentUser.getUserName());
+            jwtResponse.setEmail( currentUser.getEmail());
+            jwtResponse.setPhoneNumber(currentUser.getPhoneNumber());
+            jwtResponse.setImg(currentUser.getImg());
+            jwtResponse.setFirstName(currentUser.getFirstName());
+            jwtResponse.setLastName(currentUser.getLastName());
+            jwtResponse.setAddress(currentUser.getAddress());
+            jwtResponse.setGender(currentUser.getGender());
+            jwtResponse.setBirthDay(currentUser.getBirthDay());
+            jwtResponse.setRoles(userDetails.getAuthorities());
+            result.add(1);
+            result.add(jwtResponse);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+//            return ResponseEntity.ok(new JwtResponse(token, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(), currentUser.getImg(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getAddress(), currentUser.getGender(), currentUser.getBirthDay(), userDetails.getAuthorities()));
+        } else if (accountService.checkLogin(account) == 2) {
+            //tai khoan bi block
+            result.add(2);
+            result.add(jwtService);
+            return new ResponseEntity<>(result, HttpStatus.OK);
+        } else {
+            //sai tai khoan hoac mat khau
+            result.add(3);
+            result.add(jwtService);
+            return new ResponseEntity<>(result, HttpStatus.OK);
         }
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(account.getUserName(), account.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        String jwt = jwtService.createToken(authentication);
-        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-        Account currentUser = accountService.findByUserName(account.getUserName());
-        return ResponseEntity.ok(new JwtResponse(jwt, currentUser.getId(), currentUser.getUserName(), currentUser.getEmail(), currentUser.getPhoneNumber(),currentUser.getImg(), currentUser.getFirstName(), currentUser.getLastName(), currentUser.getAddress(), currentUser.getGender(),currentUser.getBirthDay() ,userDetails.getAuthorities()));
     }
 }
 
