@@ -5,6 +5,7 @@ import com.example.casestudy6.repository.IImgRepo;
 import com.example.casestudy6.service.impl.ImageService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,8 +24,8 @@ public class ImageController {
     IImgRepo imgRepo;
 
     @PostMapping
-    public void saveImg(@RequestBody ArrayList<Img> img) {
-        imageService.saveAll(img);
+    public void saveImg(@RequestBody ArrayList<Img> listimg) {
+        imageService.saveAll(listimg);
     }
 
     @GetMapping("/{id}")
@@ -48,5 +49,10 @@ public class ImageController {
         image.setStatus(2);
         imgRepo.save(image);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PutMapping
+    public void updateImage(@PathVariable("id") Long id, @RequestBody ArrayList<Img> listimg) {
+        imageService.updateImage(id, listimg);
     }
 }
