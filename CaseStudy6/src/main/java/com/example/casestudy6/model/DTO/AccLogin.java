@@ -2,11 +2,9 @@ package com.example.casestudy6.model.DTO;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import org.springframework.stereotype.Component;
 
 @AllArgsConstructor
 @NoArgsConstructor
-
 public class AccLogin {
     private String userName;
     private String email;
