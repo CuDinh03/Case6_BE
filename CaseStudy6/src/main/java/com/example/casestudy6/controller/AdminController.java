@@ -51,11 +51,11 @@ public class AdminController {
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
 
-//    @GetMapping("/users/{page}")
-//    public ResponseEntity<Page<Account>> getAllPage(@PathVariable int page) {
-//        Page<Account> accounts = accountService.getAllPage(PageRequest.of(page, 20, Sort.by("name")));
-//        return new ResponseEntity<>(accounts, HttpStatus.OK);
-//
-//    }
+    @GetMapping("/users/{page}")
+    public ResponseEntity<Page<Account>> getAllPage(@PathVariable int page) {
+        Page<Account> accounts = accountService.getAllPage(PageRequest.of(page, 20, Sort.by("name")));
+        return new ResponseEntity<>(accounts, HttpStatus.OK);
+
+    }
 }
 
