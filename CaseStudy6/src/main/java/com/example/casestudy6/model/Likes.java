@@ -10,6 +10,8 @@ public class Likes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private int status;
     @OneToOne
     private Account account;
 
