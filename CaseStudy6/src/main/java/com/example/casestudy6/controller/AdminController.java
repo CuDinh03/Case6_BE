@@ -6,6 +6,9 @@ import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.JwtService;
 import com.example.casestudy6.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,7 +21,7 @@ import java.util.Optional;
 
 @Validated
 @RestController
-@CrossOrigin("*")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AdminController {
     @Autowired
     AccountService accountService;
@@ -31,18 +34,28 @@ public class AdminController {
         Iterable<Account> accounts = accountService.findAll();
         return new ResponseEntity<>(accounts, HttpStatus.OK);
     }
-    @PutMapping("/disable-User/{id}")
-    public ResponseEntity<Boolean> disableUser(@PathVariable(required = true) long id){
-        Optional<Account> account =this.accountService.findById(id);
+
+    @PutMapping("/disableUser/{id}")
+    public ResponseEntity<Boolean> disableUser(@PathVariable long id) {
+        Optional<Account> account = this.accountService.findById(id);
         account.get().setStatus(1);
         accountService.save(account.get());
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
-    @PutMapping("/undisable-User/{id}")
-    public ResponseEntity<Boolean> undisableUser(@PathVariable(required = true) long id){
-        Optional<Account> account =this.accountService.findById(id);
+
+    @PutMapping("/undisableUser/{id}")
+    public ResponseEntity<Boolean> undisableUser(@PathVariable long id) {
+        Optional<Account> account = this.accountService.findById(id);
         account.get().setStatus(0);
         accountService.save(account.get());
         return new ResponseEntity<>(true, HttpStatus.OK);
     }
+
+//    @GetMapping("/users/{page}")
+//    public ResponseEntity<Page<Account>> getAllPage(@PathVariable int page) {
+//        Page<Account> accounts = accountService.getAllPage(PageRequest.of(page, 20, Sort.by("name")));
+//        return new ResponseEntity<>(accounts, HttpStatus.OK);
+//
+//    }
 }
+

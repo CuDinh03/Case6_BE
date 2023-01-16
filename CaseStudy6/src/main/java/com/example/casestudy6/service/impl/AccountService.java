@@ -4,6 +4,8 @@ import com.example.casestudy6.model.Account;
 import com.example.casestudy6.repository.IAccountRepo;
 import com.example.casestudy6.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +18,9 @@ public class AccountService implements IAccountService {
     @Autowired
     IAccountRepo iAccountRepo;
 
-
+    public Page<Account> getAllPage(Pageable pageable){
+        return iAccountRepo.findAll(pageable);
+    }
     @Override
     public void save(Account account) {
         iAccountRepo.save(account);
