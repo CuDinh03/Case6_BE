@@ -1,4 +1,4 @@
-package com.example.casestudy6.model.dto;
+package com.example.casestudy6.model.DTO;
 
 import java.util.Date;
 

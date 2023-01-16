@@ -1,9 +1,9 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.dto.AccountEdit;
-import com.example.casestudy6.model.dto.ChangePassword;
-import com.example.casestudy6.model.dto.FriendList;
+import com.example.casestudy6.model.DTO.AccountEdit;
+import com.example.casestudy6.model.DTO.ChangePassword;
+import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.service.IAccountService;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.RoleService;
@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 

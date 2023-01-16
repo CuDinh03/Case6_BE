@@ -1,12 +1,10 @@
 package com.example.casestudy6.service;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.dto.AccountEdit;
-import com.example.casestudy6.model.dto.FriendList;
-import org.springframework.security.core.userdetails.UserDetails;
+import com.example.casestudy6.model.DTO.AccountEdit;
+import com.example.casestudy6.model.DTO.FriendList;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-import java.util.Date;
 import java.util.Optional;
 
 //Lưu ý phải chạy thư viện Security
