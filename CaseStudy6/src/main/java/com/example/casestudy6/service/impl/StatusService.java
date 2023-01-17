@@ -1,17 +1,21 @@
 package com.example.casestudy6.service.impl;
 
 import com.example.casestudy6.model.Status;
+import com.example.casestudy6.repository.ICommentRepo;
 import com.example.casestudy6.repository.StatusRepo;
 import com.example.casestudy6.service.IStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class StatusService implements IStatusService<Status> {
     @Autowired
     StatusRepo statusRepo;
+    @Autowired
+    private ICommentRepo iCommentRepo;
 
     @Override
     public Iterable<Status> findAllPublicStatus() {
@@ -33,6 +37,8 @@ public class StatusService implements IStatusService<Status> {
         statusRepo.save(status);
     }
 
+
+
     @Override
     public void remove(Long id) {
 
@@ -41,6 +47,11 @@ public class StatusService implements IStatusService<Status> {
     @Override
     public Status findLastStatus() {
         return statusRepo.findLastStatus();
+    }
+
+    @Override
+    public Iterable<Status> findAllStatusOfMe(Long id, String any) {
+        return statusRepo.findByContent(id, any);
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.example.casestudy6.service;
 
 import com.example.casestudy6.model.Status;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface IStatusService<T> {
@@ -16,6 +17,9 @@ public interface IStatusService<T> {
     void remove(Long id);
 
     T findLastStatus();
+
+    Iterable<T> findAllStatusOfMe(Long id, String any);
+
 
     Iterable<T> findAllByAccountId(Long id);
 

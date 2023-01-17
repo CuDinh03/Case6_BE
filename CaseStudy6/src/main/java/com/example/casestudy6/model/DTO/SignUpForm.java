@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 
+@Component
 public class SignUpForm {
     private String userName;
     private String email;
