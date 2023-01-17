@@ -1,7 +1,8 @@
 package com.example.casestudy6.service.impl;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.DTO.*;
+import com.example.casestudy6.model.DTO.AccountEdit;
+import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.repository.IAccountRepo;
 import com.example.casestudy6.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,7 @@ public class AccountService implements IAccountService {
     public long checkLogin(Account account) {
         long isCorrectUser;
         Account account1 = findByUserName(account.getUserName());
-        if (account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 0) {
+        if (account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 0 || account1.getStatus()==4|| account1.getStatus()==5||account1.getStatus()==6||account1.getStatus()==7) {
             isCorrectUser = 1;
         } else if (account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 1) {
             isCorrectUser = 2;
