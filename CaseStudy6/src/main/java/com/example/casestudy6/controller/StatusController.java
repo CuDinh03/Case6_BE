@@ -33,38 +33,22 @@ public class StatusController {
         listStatus.addAll(publicStatus);
         listStatus.addAll(friendStatus);
         result.add(listStatus);
-//        ArrayList<Iterable<Img>> listImage = new ArrayList<>();
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-//        for (Status status : listStatus) {
-//            Iterable<Img> images = imageService.findAllByStatusId(status.getId());
-//            listImage.add(images);
-//            result.add(listImage);
-//        }
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ArrayList<?>> findAllByAccountId(@PathVariable("id") Long id) {
-        Optional<Status> status = statusService.findById(id);
-        if (!status.isPresent()) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
         ArrayList<Iterable> result = new ArrayList<>();
         Iterable<Status> statuses = statusService.findAllByAccountId(id);;
-        ArrayList<Integer> listNumberOfLike = new ArrayList<>();
         result.add(statuses);
-//        Iterable<Img> images = imageService.findAllByStatus(status.get().getId());
-//        result.add(images);
-//        Integer numberOfLike = likeStatusService.findNumberOfLikeByStatus(status.get().getId());
-//        if (numberOfLike == null) {
-//            numberOfLike = 0;
-//        }
-//        listNumberOfLike.add(numberOfLike);
-//        result.add(listNumberOfLike);
+        if (result.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity(result, HttpStatus.OK);
     }
 
