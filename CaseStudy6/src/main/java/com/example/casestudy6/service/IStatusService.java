@@ -19,4 +19,6 @@ public interface IStatusService<T> {
 
     Iterable<T> findAllByAccountId(Long id);
 
+    Iterable<T> findAllByGuestId(Long id);
+
 }
