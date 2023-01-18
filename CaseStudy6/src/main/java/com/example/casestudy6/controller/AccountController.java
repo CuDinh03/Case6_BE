@@ -2,7 +2,6 @@ package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
 import com.example.casestudy6.model.DTO.AccountEdit;
-import com.example.casestudy6.model.DTO.ChangePassword;
 import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.service.IAccountService;
 import com.example.casestudy6.service.impl.AccountService;
@@ -36,7 +35,7 @@ public class AccountController {
     }
 
     @PostMapping("/changepassword")
-    public ResponseEntity<Boolean> changePassword(@RequestBody ChangePassword changePassword) {
+    public ResponseEntity<Boolean> changePassword(@RequestBody com.example.casestudy6.model.DTO.ChangePassword changePassword) {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         Account account = accountService.findByUserName(userDetails.getUsername());
         String newPassword;

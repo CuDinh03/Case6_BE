@@ -9,4 +9,7 @@ public interface IImageService<T> {
     Iterable<T> findAllByStatusId(Long id);
 
     Optional<T> findById (Long id);
+
+    default void updateImage(Long id, ArrayList<T> t) {
+    }
 }

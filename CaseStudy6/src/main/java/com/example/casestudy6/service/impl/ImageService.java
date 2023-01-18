@@ -4,6 +4,7 @@ import com.example.casestudy6.model.Img;
 import com.example.casestudy6.model.Status;
 import com.example.casestudy6.repository.IImgRepo;
 import com.example.casestudy6.service.IImageService;
+import com.sun.xml.messaging.saaj.packaging.mime.internet.ParameterList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,11 +22,11 @@ public class ImageService implements IImageService<Img> {
     Img img1 = new Img();
 
     @Override
-    public void saveAll(ArrayList<Img> img) {
+    public void saveAll(ArrayList<Img> listimg) {
         Status status = statusService.findLastStatus();
-        for (int i = 0; i < img.size(); i++) {
-            imgRepo.save(img.get(i));
-            img1 = imgRepo.findByName(img.get(i).getName());
+        for (int i = 0; i < listimg.size(); i++) {
+            imgRepo.save(listimg.get(i));
+            img1 = imgRepo.findByName(listimg.get(i).getName());
             imgRepo.saveImageStatus(status.getId(), img1.getId());
         }
     }
@@ -40,5 +41,14 @@ public class ImageService implements IImageService<Img> {
         return imgRepo.findById(id);
     }
 
+    public void updateImage(Long id, ArrayList<Img> listimg) {
+        for (int i = 0; i < listimg.size(); i++) {
+            if (listimg.get(i).getId() == 0) {
+                imgRepo.save(listimg.get(i));
+                Img img = imgRepo.findLastImg();
+                imgRepo.saveImageStatus(id, img.getId());
+            } else {imgRepo.saveImageStatus(id, listimg.get(i).getId());}
 
+        }
+    }
 }

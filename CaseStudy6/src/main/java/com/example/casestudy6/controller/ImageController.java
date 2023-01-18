@@ -49,4 +49,9 @@ public class ImageController {
         imgRepo.save(image);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @PutMapping("/{id}")
+    public void updateImage(@PathVariable("id") Long id, @RequestBody ArrayList<Img> listimg) {
+        imageService.updateImage(id, listimg);
+    }
 }
