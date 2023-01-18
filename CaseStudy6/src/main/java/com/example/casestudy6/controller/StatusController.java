@@ -46,6 +46,11 @@ public class StatusController {
         ArrayList<Iterable> result = new ArrayList<>();
         Iterable<Status> statuses = statusService.findAllByAccountId(id);;
         result.add(statuses);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         if (result.size() == 0) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
