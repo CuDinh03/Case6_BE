@@ -16,6 +16,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Validated
 @RestController
 @CrossOrigin("*")
@@ -58,5 +61,9 @@ public class AccountController {
     @GetMapping("account/{account}")
     public ResponseEntity<FriendList> findbyid(@PathVariable long account){
         return new ResponseEntity<>(iAccountService.getAccountById(account),HttpStatus.OK);
+    }
+    @GetMapping("/recommend")
+    public ResponseEntity<List<FriendList>> getAllUsers(){
+        return new ResponseEntity<>(iAccountService.getAllUsers(),HttpStatus.OK);
     }
 }

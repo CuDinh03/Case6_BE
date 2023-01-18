@@ -53,4 +53,5 @@ public interface IFriendRepo extends PagingAndSortingRepository<Friends,Long> {
     void deleteRequest(@Param("account2_id") long account2_id,@Param("account1") long account1);
 
 
+
 }

@@ -13,11 +13,14 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class AccountService implements IAccountService {
     Account account1 = new Account();
+    List<FriendList> list1= new ArrayList<FriendList>();
     @Autowired
     IAccountRepo iAccountRepo;
 
@@ -54,7 +57,7 @@ public class AccountService implements IAccountService {
     public long checkLogin(Account account) {
         long isCorrectUser;
         Account account1 = findByUserName(account.getUserName());
-        if (account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 0 || account1.getStatus()==4|| account1.getStatus()==5||account1.getStatus()==6||account1.getStatus()==7) {
+        if ((account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 4) ||(account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 0 )||( account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 5)||(account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 6)||(account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 7)) {
             isCorrectUser = 1;
         } else if (account1 != null && account1.getPassword().equals(account.getPassword()) && account1.getStatus() == 1) {
             isCorrectUser = 2;
@@ -114,6 +117,24 @@ public class AccountService implements IAccountService {
         return friendList ;
     }
 
+    @Override
+    public List<FriendList> getAllUsers() {
+        FriendList friendList = new FriendList();
+        ArrayList<Account> list2= (ArrayList<Account>) iAccountRepo.findAll();
+        for (int i = 0; i < list2.size(); i++) {
+            friendList.setId(list2.get(i).getId());
+            friendList.setFirstName(list2.get(i).getFirstName());
+            friendList.setLastName(list2.get(i).getLastName());
+            friendList.setAddress(list2.get(i).getAddress());
+            friendList.setGender(list2.get(i).getGender());
+            friendList.setImg(list2.get(i).getImg().getName());
+            friendList.setBirthDay(list2.get(i).getBirthDay());
+            friendList.setPhoneNumber(list2.get(i).getPhoneNumber());
+            list1.add(friendList);
+
+        }
+        return list1;
+    }
 
 
     @Override
