@@ -1,7 +1,6 @@
 package com.example.casestudy6.service.impl;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.dto.*;
 import com.example.casestudy6.model.DTO.FriendList;
 import com.example.casestudy6.model.DTO.AccountEdit;
 import com.example.casestudy6.repository.IAccountRepo;
