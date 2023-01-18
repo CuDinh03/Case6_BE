@@ -1,7 +1,9 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
+import com.example.casestudy6.model.Img;
 import com.example.casestudy6.model.Role;
+
 import com.example.casestudy6.model.dto.SignUpForm;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.RoleService;
@@ -56,8 +58,16 @@ public class RegisterController {
             account1.setLastName(signUpForm.getLastName());
             Set<Role> roles = new HashSet<>();
             Role role = new Role();
+            account1.setStatus(4);
             role.setId(2);
             roles.add(role);
+            Img image = new Img();
+            if(account1.getGender().equals("Nam")){
+                image.setId(1L);
+            }else {
+                image.setId(2L);
+            }
+            account1.setImg(image);
             account1.setRoles(roles);
             accountService.save(account1);
             result.add(true);
