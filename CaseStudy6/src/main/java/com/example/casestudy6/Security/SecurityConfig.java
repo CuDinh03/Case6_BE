@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addHeaderWriter(
                         new StaticHeadersWriter("Access-Control-Allow-Origin", "address for your front-end here")
                 );
-        http.authorizeRequests().antMatchers(  "/register", "/users/**","/**").permitAll();
+        http.authorizeRequests().antMatchers(  "/hello","/topic/public","/gkz-stomp-endpoint","/chat","/chat/**","/register", "/users/**","/**").permitAll();
         http.authorizeRequests().antMatchers("/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**","/main").access("hasRole('ROLE_USER')")
                 .anyRequest().authenticated()
                 .and().csrf().disable();

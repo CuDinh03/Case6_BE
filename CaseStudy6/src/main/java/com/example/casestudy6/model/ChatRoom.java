@@ -11,10 +11,17 @@ public class ChatRoom {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id", nullable = false)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    private String accountName;
     private String content;
+
+    public ChatRoom() {
+    }
+
+    public ChatRoom(Long id, String accountName, String content) {
+        this.id = id;
+        this.accountName = accountName;
+        this.content = content;
+    }
 
     public Long getId() {
         return id;
@@ -22,5 +29,21 @@ public class ChatRoom {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getAccountName() {
+        return accountName;
+    }
+
+    public void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

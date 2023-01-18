@@ -24,4 +24,8 @@ public class Chat {
         this.account = account;
         this.status = status;
     }
+
+    public Chat(String contentChat) {
+        this.contentChat = contentChat;
+    }
 }
