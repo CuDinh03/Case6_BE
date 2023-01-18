@@ -58,4 +58,9 @@ public class StatusService implements IStatusService<Status> {
     public Iterable<Status> findAllByAccountId(Long id) {
         return statusRepo.findByAccountId(id);
     }
+
+    @Override
+    public Iterable<Status> findAllByGuestId(Long id) {
+        return statusRepo.findAllByGuestId(id);
+    }
 }

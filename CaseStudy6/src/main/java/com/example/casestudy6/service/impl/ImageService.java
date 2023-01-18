@@ -40,5 +40,12 @@ public class ImageService implements IImageService<Img> {
         return imgRepo.findById(id);
     }
 
+    @Override
+    public Img findLastImg() {
+        return imgRepo.findLastImg();
+    }
 
+    public void save(Img img) {
+        imgRepo.save(img);
+    }
 }

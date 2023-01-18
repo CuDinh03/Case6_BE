@@ -1,64 +1,31 @@
-package com.example.casestudy6.model.DTO;
+package com.example.casestudy6.model.dto;
 
-import org.springframework.stereotype.Component;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.example.casestudy6.model.Img;
+
 import java.util.Date;
 
 
-public class FriendList {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class AccountEdit {
     private Long id;
-    private String username;
     private String firstName;
     private String lastName;
     private Date birthDay;
-    private String img;
     private String gender;
     private String address;
     private String phoneNumber;
     private int status;
+    private Img img;
 
-    public FriendList() {
-    }
-
-    public int getStatus() {
-        return status;
-    }
-
-    public void setStatus(int status) {
-        this.status = status;
-    }
-
-    public FriendList(Long id, String username, String firstName, String lastName, Date birthDay, String img, String gender, String address, String phoneNumber, int status) {
+    public AccountEdit(Long id, String username, String firstName, String lastName, Date birthDay, String gender, String address, String phoneNumber, int status, Img img) {
         this.id = id;
-        this.username = username;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDay = birthDay;
-        this.img = img;
         this.gender = gender;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.status = status;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getImg() {
-        return img;
-    }
-
-    public void setImg(String img) {
         this.img = img;
     }
 
@@ -69,6 +36,10 @@ public class FriendList {
     public void setId(Long id) {
         this.id = id;
     }
+
+
+
+
 
     public String getFirstName() {
         return firstName;
@@ -116,5 +87,13 @@ public class FriendList {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

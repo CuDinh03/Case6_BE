@@ -9,4 +9,6 @@ public interface IImageService<T> {
     Iterable<T> findAllByStatusId(Long id);
 
     Optional<T> findById (Long id);
+
+    T findLastImg();
 }

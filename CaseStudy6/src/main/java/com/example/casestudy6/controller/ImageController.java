@@ -49,4 +49,15 @@ public class ImageController {
         imgRepo.save(image);
         return new ResponseEntity(HttpStatus.OK);
     }
+
+    @GetMapping
+    public ResponseEntity<Img> findLastImg() {
+        Img img = imageService.findLastImg();
+        return new ResponseEntity(img, HttpStatus.OK);
+    }
+
+    @PostMapping("/one")
+    public void save(@RequestBody Img img) {
+        imageService.save(img);
+    }
 }

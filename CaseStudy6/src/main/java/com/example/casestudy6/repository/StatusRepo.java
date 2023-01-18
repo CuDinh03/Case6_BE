@@ -30,4 +30,6 @@ public interface StatusRepo extends JpaRepository<Status, Long> {
     @Query(value = "select * from status where status.account_id = :id and content like concat('%',:any,'%') order by post_day desc", nativeQuery = true)
     Iterable<Status> findByContent ( @Param("id") Long id, @Param("any")  String any);
 
+    @Query(value = "select * from status where account_id = :id and status = 1 order by post_day desc", nativeQuery = true)
+    Iterable<Status> findAllByGuestId(@Param("id") Long id);
 }

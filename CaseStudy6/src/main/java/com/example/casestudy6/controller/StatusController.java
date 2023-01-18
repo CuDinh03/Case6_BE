@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -123,4 +122,14 @@ public class StatusController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
+    @GetMapping("/guest/{id}")
+    public ResponseEntity<ArrayList<?>> findAllByGuestId(@PathVariable("id") Long id) {
+        ArrayList<Iterable> result = new ArrayList<>();
+        Iterable<Status> statuses = statusService.findAllByGuestId(id);
+        result.add(statuses);
+        if (result.size() == 0) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity(result, HttpStatus.OK);
+    }
 }
