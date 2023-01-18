@@ -3,7 +3,7 @@ package com.example.casestudy6.service.impl;
 
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.DTO.FriendList;
+import com.example.casestudy6.model.dto.FriendList;
 import com.example.casestudy6.model.Friends;
 import com.example.casestudy6.repository.IAccountRepoF;
 import com.example.casestudy6.repository.IFriendRepo;
@@ -25,8 +25,6 @@ public class FriendService implements IFriendService {
     public List<FriendList> getAll(String account1) {
 
         listFriend = new ArrayList<FriendList>();
-
-
         List<Friends> list = iFriendRepo.getAllFriends(account1);
 
         for (int i = 0; i < list.size(); i++) {

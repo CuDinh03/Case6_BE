@@ -1,8 +1,9 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
+import com.example.casestudy6.model.dto.SignUpForm;
+import com.example.casestudy6.model.Img;
 import com.example.casestudy6.model.Role;
-import com.example.casestudy6.model.DTO.SignUpForm;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,7 +59,11 @@ public class RegisterController {
             Role role = new Role();
             role.setId(2);
             roles.add(role);
+            Img img = new Img();
+            img.setId(3L);
+            account1.setImg(img);
             account1.setRoles(roles);
+            account1.setStatus(4);
             accountService.save(account1);
             result.add(true);
             result.add(true);

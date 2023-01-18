@@ -1,9 +1,9 @@
 package com.example.casestudy6.controller;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.DTO.AccountEdit;
-import com.example.casestudy6.model.DTO.ChangePassword;
-import com.example.casestudy6.model.DTO.FriendList;
+import com.example.casestudy6.model.dto.AccountEdit;
+import com.example.casestudy6.model.dto.ChangePassword;
+import com.example.casestudy6.model.dto.FriendList;
 import com.example.casestudy6.service.IAccountService;
 import com.example.casestudy6.service.impl.AccountService;
 import com.example.casestudy6.service.impl.RoleService;

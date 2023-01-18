@@ -1,6 +1,4 @@
-package com.example.casestudy6.model.DTO;
-
-import org.springframework.stereotype.Component;
+package com.example.casestudy6.model.dto;
 
 
 public class ResponseMessage {

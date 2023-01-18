@@ -1,8 +1,8 @@
 package com.example.casestudy6.service.impl;
 
 import com.example.casestudy6.model.Account;
-import com.example.casestudy6.model.DTO.AccountEdit;
-import com.example.casestudy6.model.DTO.FriendList;
+import com.example.casestudy6.model.dto.AccountEdit;
+import com.example.casestudy6.model.dto.FriendList;
 import com.example.casestudy6.repository.IAccountRepo;
 import com.example.casestudy6.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -113,8 +113,6 @@ public class AccountService implements IAccountService {
         friendList.setUsername(iAccountRepo.findById(id).get().getUserName());
         return friendList ;
     }
-
-
 
     @Override
     public UserDetails loadUserByUsername(String userName) {
