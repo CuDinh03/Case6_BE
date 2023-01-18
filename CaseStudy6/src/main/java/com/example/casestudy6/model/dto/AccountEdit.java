@@ -1,6 +1,7 @@
-package com.example.casestudy6.model.DTO;
+package com.example.casestudy6.model.dto;
 
-import org.springframework.stereotype.Component;
+
+import com.example.casestudy6.model.Img;
 
 import java.util.Date;
 
@@ -14,8 +15,9 @@ public class AccountEdit {
     private String address;
     private String phoneNumber;
     private int status;
+    private Img img;
 
-    public AccountEdit(Long id, String username, String firstName, String lastName, Date birthDay, String gender, String address, String phoneNumber, int status) {
+    public AccountEdit(Long id, String username, String firstName, String lastName, Date birthDay, String gender, String address, String phoneNumber, int status, Img img) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -24,6 +26,7 @@ public class AccountEdit {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.status = status;
+        this.img = img;
     }
 
     public Long getId() {
