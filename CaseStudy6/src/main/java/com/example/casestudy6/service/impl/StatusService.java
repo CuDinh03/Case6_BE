@@ -7,7 +7,6 @@ import com.example.casestudy6.service.IStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,8 +35,6 @@ public class StatusService implements IStatusService<Status> {
     public void save(Status status) {
         statusRepo.save(status);
     }
-
-
 
     @Override
     public void remove(Long id) {

@@ -10,5 +10,7 @@ public interface IImageService<T> {
 
     Optional<T> findById (Long id);
 
+    default void updateImage(Long id, ArrayList<T> t) {}
+
     T findLastImg();
 }

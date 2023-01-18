@@ -50,6 +50,11 @@ public class ImageController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    @PutMapping("/{id}")
+    public void updateImage(@PathVariable("id") Long id, @RequestBody ArrayList<Img> listimg) {
+        imageService.updateImage(id, listimg);
+    }
+
     @GetMapping
     public ResponseEntity<Img> findLastImg() {
         Img img = imageService.findLastImg();
