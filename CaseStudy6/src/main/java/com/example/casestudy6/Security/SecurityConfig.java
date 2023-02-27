@@ -63,15 +63,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().ignoringAntMatchers("/**");
         http.authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS).permitAll();
+                .antMatchers(HttpMethod.DELETE).permitAll();
         http.headers()
                 .addHeaderWriter(
                         new StaticHeadersWriter("Access-Control-Allow-Origin", "address for your front-end here")
                 );
-        http.authorizeRequests().antMatchers(  "/hello","/topic/public","/gkz-stomp-endpoint/websocket","/chat","/chat/**","/register", "/users/**","/**").permitAll();
-        http.authorizeRequests().antMatchers("/comments/**", "/images/**", "/like-comments/**", "/like-statuses/**", "/relationships/**", "/statuses/**","/main").access("hasRole('ROLE_USER')")
-                .anyRequest().authenticated()
-                .and().csrf().disable();
 
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class)
                 .exceptionHandling();
